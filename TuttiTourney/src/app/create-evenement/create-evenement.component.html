@@ -1,0 +1,10 @@
+<form (ngSubmit)="onSubmit()">
+  <p> Nom de l'événement : <input type="text" name="evenementName" [(ngModel)]="newEvenement.name"></p>
+  <p> Date de l'événement : <input type="date" name="evenementDate" [(ngModel)]="newEvenement.date"></p>
+  <input type="submit" value="Créer événement">
+</form>
+
+<ul *ngFor="let event of events">
+  <li>{{event.name}}</li>
+  <li>{{event.date}}</li>
+</ul>
