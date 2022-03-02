@@ -2,6 +2,6 @@ export default class Evenement {
 
   constructor() { };
 
-  name !: string;
+  nom !: string;
   date !: Date;
 }

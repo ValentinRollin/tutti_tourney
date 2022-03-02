@@ -4,7 +4,7 @@ const tournoi = require('./tournois');
 const eventSchema = new mongoose.Schema({
   nom: {
     type: String,
-    required: true,
+    required: true
   },
   date: {
     type: Date,
@@ -28,13 +28,12 @@ exports.getAll = function (req, res) {
 
 //POST
 exports.post = function (req, res) {
-  //console.log(req.body.nom);
-  //console.log(req.body.date);
 
   const newEvent = new Event({
     nom: req.body.nom,
     date: req.body.date,
   });
+  //console.log(newEvent);
 
   newEvent.save(function (error) {
     if (error) {

@@ -18,6 +18,11 @@ app.use(express.static(__dirname));
 // Add headers before the routes are defined
 app.use(cors());
 
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// // parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //Connexion mongodb
 mongoose.connect("mongodb://localhost:27017/tuttiDB");
 
