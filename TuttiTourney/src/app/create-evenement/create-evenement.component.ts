@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import Evenement from './models/evenements';
+import {Evenement} from  '../interfaces/evenement'
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { EvenementService } from '../services/evenement.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-evenement',
@@ -11,34 +13,31 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class CreateEvenementComponent {
   events: Evenement[] = [];
-  newEvenement: Evenement = new Evenement();
+  newEvenement : Evenement = {};
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private eventService: EvenementService, public route: Router) {}
 
   onSubmit(): void {
 
-    //ajout a la liste d'event
+    // //ajout a la liste d'event
     this.events.push(this.newEvenement);
 
-    //post to restAPI
-    const headers = { 'content-type': 'application/json' };
-    const body = JSON.stringify(this.newEvenement);
-    console.log(body);
-    this.httpClient.post('http://localhost:3000/events/', body, {
-      headers: headers,
-    })
-    .subscribe(data => {
-      console.log(data);
-    });
-
-    //reset newEvenement
-    this.newEvenement = new Evenement();
+    // //post to restAPI
+    this.eventService.createEvent(this.newEvenement).subscribe(
+      (data) => console.log(data),
+      (error: any) => console.log(error),
+      ()=> console.log("Succesfully added Event to database")
+    );
   }
 
   ngOnInit(): void {
-    this.httpClient.get('http://localhost:3000/events').subscribe((data) => {
-      console.log(data);
-    });
+    this.eventService.getEvents().subscribe(
+      (data) => console.table(data)
+    );
+  }
 
+//route
+  redirection():void{
+    this.route.navigate(['/events']);
   }
 }

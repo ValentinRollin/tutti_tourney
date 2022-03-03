@@ -7,12 +7,14 @@ import { CreateEvenementComponent } from './create-evenement/create-evenement.co
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ShowEventComponent } from './show-event/show-event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateEvenementComponent,
-    NavbarComponent
+    NavbarComponent,
+    ShowEventComponent
   ],
   imports: [
     BrowserModule,
