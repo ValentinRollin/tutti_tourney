@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+
 html,
 body {
-  margin: 0;
-  padding: 0;
-  border: 0;
   font-family: "Tenor Sans", sans-serif;
   font-size: 1rem;
+}
+
+body{
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #2B2E4A;
 }
 
 h1 {

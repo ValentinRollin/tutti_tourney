@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="create-equipe">
+     <form (ngSubmit)="onSubmit()">
+       <p> Nom de l'équipe : <input type="text" name="nom" [(ngModel)]="newEquipe.nom"></p>
+       <p> Nombre de joueur dans l'équipe : <input type="number" name="nbjoueur" [(ngModel)]="newEquipe.nbjoueur"></p>
+       <input type="submit" value="Créer une équipe">
+     </form>
+
+   </div>
+</div>

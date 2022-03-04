@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="create-tournoi">
+     <form (ngSubmit)="onSubmit()">
+       <p> Nom du tournoi : <input type="text" name="nom" [(ngModel)]="newTournoi.nom"></p>
+       <p> Sport du tournoi : <input type="text" name="sport" [(ngModel)]="newTournoi.sport"></p>
+       <input type="submit" value="Créer un tournoi">
+     </form>
+
+   </div>
+</div>
+

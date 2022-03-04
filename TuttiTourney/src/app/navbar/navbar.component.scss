@@ -1,18 +1,27 @@
 nav{
-  background-color: #2B2E4A;
+ display: flex;
+ justify-content:space-between;
+ background-color: #903745;
+ margin :  0;
 }
 
 nav, a{
-  padding: 1em 1em;
+  padding: 1.2em;
   text-align: left;
   color: #f2f2f2;
   text-decoration: none;
 }
 
 a:hover{
-  background-color: #53354A;
+  background-color: #7e303c;
+  padding: 1em;
 }
 
 a.home{
-  background-color: #E84545;
+  font-size: 1.2em;
+}
+
+.left{
+  //pour centrer la partie gauche
+  margin-top: 2px;
 }

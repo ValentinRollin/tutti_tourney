@@ -8,13 +8,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowEventComponent } from './show-event/show-event.component';
+import { CreateTournoiComponent } from './create-tournoi/create-tournoi.component';
+import { CreateEquipeComponent } from './create-equipe/create-equipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateEvenementComponent,
     NavbarComponent,
-    ShowEventComponent
+    ShowEventComponent,
+    CreateTournoiComponent,
+    CreateEquipeComponent
   ],
   imports: [
     BrowserModule,

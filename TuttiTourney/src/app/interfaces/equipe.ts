@@ -1,4 +1,4 @@
-export interface Equipes {
-  nom: string;
-  nbjoueur: number;
+export interface Equipe {
+  nom ?: string;
+  nbjoueur ?: number;
 }

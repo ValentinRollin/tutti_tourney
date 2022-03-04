@@ -31,13 +31,13 @@ export class CreateEvenementComponent {
   }
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe(
-      (data) => console.table(data)
-    );
+    // this.eventService.getEvents().subscribe(
+    //   (data) => console.table(data)
+    // );
   }
 
 //route
-  redirection():void{
-    this.route.navigate(['/events']);
-  }
+  // redirection():void{
+  //   this.route.navigate(['/events']);
+  // }
 }
