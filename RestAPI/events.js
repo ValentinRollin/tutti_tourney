@@ -44,6 +44,20 @@ exports.post = function (req, res) {
   });
 };
 
+//PUT
+exports.put = function (req, res) {
+
+  const name = req.params.nomEvent;
+  const tournoi = req.body;
+  Event.updateOne({nom: name}, {tournois: tournoi}, function (error) {
+    if (error) {
+      res.send(error);
+    } else {
+      res.send("Update de l'event réussi.");
+    }
+  });
+};
+
 //DELETE ALL
 exports.deleteAll = function (req, res) {
 

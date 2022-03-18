@@ -30,6 +30,7 @@ mongoose.connect("mongodb://localhost:27017/tuttiDB");
 app.get("/events", events.getAll);
 app.post("/events", events.post);
 app.delete("/events", events.deleteAll);
+app.put("/events/:nomEvent", events.put);
 
 //API tournois
 app.get("/tournois", tournois.getAll);

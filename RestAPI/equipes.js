@@ -9,6 +9,10 @@ const equipeSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
+    niveau: {
+      type : String,
+      required : true
+    }
   });;
 
   const Equipe = mongoose.model("Equipe", equipeSchema);

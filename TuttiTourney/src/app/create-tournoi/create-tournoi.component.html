@@ -1,6 +1,12 @@
 <div class="container">
   <div class="create-tournoi">
      <form (ngSubmit)="onSubmit()">
+      <p>
+        Nom de l'evenement :
+        <select name="nomEvent" [(ngModel)]="nomEvenement">
+          <option *ngFor="let event of events" [ngValue]="event.nom">{{ event.nom }}</option>
+        </select>
+      </p>
        <p> Nom du tournoi : <input type="text" name="nom" [(ngModel)]="newTournoi.nom"></p>
        <p> Sport du tournoi : <input type="text" name="sport" [(ngModel)]="newTournoi.sport"></p>
        <input type="submit" value="Créer un tournoi">
