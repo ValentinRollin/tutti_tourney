@@ -1,8 +1,9 @@
-nav{
- display: flex;
- justify-content:space-between;
- background-color: #903745;
- margin :  0;
+nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #903745;
+  margin: 0;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 nav, a{

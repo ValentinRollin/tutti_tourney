@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EvenementService } from '../services/evenement.service';
 
 @Component({
@@ -6,20 +7,24 @@ import { EvenementService } from '../services/evenement.service';
   templateUrl: './show-event.component.html',
   styleUrls: ['./show-event.component.scss']
 })
+
 export class ShowEventComponent implements OnInit {
 
   events !: any[];
 
-  constructor(private eventService: EvenementService) { }
+  constructor(private eventService: EvenementService, public route : Router) { }
 
-  ngOnInit(): void {
-    this.eventService.getEvents().subscribe(
+  ngOnInit(): void
+  {
+    this.eventService.getEvents().subscribe
+    (
       (data) => this.events = data
     );
   }
 
-  redirection(): void{
-
+  redirection(): void
+  {
+    this.route.navigate(["/tournois"]);
   }
 
 }

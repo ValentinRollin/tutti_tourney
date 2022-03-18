@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="tournoi" *ngFor="let tournoi of tournois" (click)="redirection()">
+    <h2> {{ tournoi.nom }} </h2>
+    <h3> {{ tournoi.sport }} </h3>
+  </div>
+</div>
