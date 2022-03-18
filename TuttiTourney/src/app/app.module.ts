@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShowEventComponent } from './show-event/show-event.component';
 import { CreateTournoiComponent } from './create-tournoi/create-tournoi.component';
 import { CreateEquipeComponent } from './create-equipe/create-equipe.component';
+import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateEquipeComponent } from './create-equipe/create-equipe.component';
     NavbarComponent,
     ShowEventComponent,
     CreateTournoiComponent,
-    CreateEquipeComponent
+    CreateEquipeComponent,
+    ShowTournoiComponent
   ],
   imports: [
     BrowserModule,
