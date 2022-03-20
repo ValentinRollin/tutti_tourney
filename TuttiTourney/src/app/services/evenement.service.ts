@@ -14,31 +14,31 @@ export class EvenementService {
 
   constructor(private http: HttpClient) { }
 
-  getEvents(): Observable<Evenement[]>{
-    return this.http.get<Evenement[]>(this.apiUrl+'/events');
+  getEvenements(): Observable<Evenement[]>{
+    return this.http.get<Evenement[]>(this.apiUrl+'/evenements');
   }
 
-  getEvent(name : string): Observable<Evenement>{
-    return this.http.get<Evenement>(this.apiUrl + '/events' + name);
+  getEvenement(name : string): Observable<Evenement>{
+    return this.http.get<Evenement>(this.apiUrl + '/evenements' + name);
   }
 
-  createEvent(event: Evenement): Observable<Evenement>{
+  createEvenement(evenement: Evenement): Observable<Evenement>{
     const headers = { 'content-type': 'application/json' };
-    const body = JSON.stringify(event);
+    const body = JSON.stringify(evenement);
     console.log(body);
-    return this.http.post<Evenement>(this.apiUrl+'/events', body,
+    return this.http.post<Evenement>(this.apiUrl+'/evenements', body,
     {
       headers: headers,
       });
   }
 
-  updateEvent(nomEvent: String, tournoi:Tournoi): Observable<Evenement>{
+  updateEvenement(nomEvenement: String, tournoi:Tournoi): Observable<Evenement>{
     const headers = { 'content-type': 'application/json' };
-    const path = nomEvent;
-    //console.log(event)
+    const path = nomEvenement;
+    //console.log(evenement)
     const body = JSON.stringify(tournoi);
     console.log(body);
-    return this.http.put<Evenement>(this.apiUrl+'/events/'+path, body,
+    return this.http.put<Evenement>(this.apiUrl+'/evenements/'+path, body,
     {
       headers: headers,
       });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Equipe } from '../interfaces/equipe';
 import { Router } from '@angular/router';
 import { EquipeService } from '../services/equipe.service';
+import { TournoiService } from '../services/tournois.service';
 
 @Component
 ({
@@ -14,8 +15,9 @@ export class CreateEquipeComponent implements OnInit
 {
   equipes: Equipe[] = [];
   newEquipe : Equipe = {};
+  tournois !: any[];
 
-  constructor(private equipeService: EquipeService, public route: Router){}
+  constructor(private equipeService: EquipeService, private tournoiservice: TournoiService, public route: Router){}
 
   onSubmit(): void
   {
@@ -34,6 +36,9 @@ export class CreateEquipeComponent implements OnInit
 
   ngOnInit(): void
   {
+    this.tournoiservice.getTournois().subscribe(
+      (data) => this.tournois = data
+    );
   }
 
 }

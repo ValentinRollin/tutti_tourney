@@ -17,8 +17,8 @@ export class TournoiService {
     return this.http.get<Tournoi[]>(this.apiUrl+'/tournois');
   }
 
-  getTournoi(name : string): Observable<Tournoi>{
-    return this.http.get<Tournoi>(this.apiUrl + '/tournois' + name);
+  getTournoi(name : any): Observable<Tournoi[]>{
+    return this.http.get<Tournoi[]>(this.apiUrl + '/tournois/' + name);
   }
 
   createTournoi(tournoi: Tournoi): Observable<Tournoi>{

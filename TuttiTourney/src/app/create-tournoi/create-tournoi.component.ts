@@ -15,19 +15,12 @@ export class CreateTournoiComponent implements OnInit {
 
   tournois: Tournoi[] = [];
   newTournoi : Tournoi = {};
-  events !: any[];
+  evenements !: any[];
   nomEvenement : String = "";
 
-  constructor(private tournoiservice: TournoiService, public route: Router, private eventService: EvenementService) {}
+  constructor(private tournoiservice: TournoiService, public route: Router, private evenementService: EvenementService) {}
 
   onSubmit(): void {
-
-    //update Evenement to restAPI
-    this.eventService.updateEvent(this.nomEvenement, this.newTournoi).subscribe(
-      (data) => console.log(data),
-      (error: any) => console.log(error),
-      ()=> console.log("Succesfully update evenement to database")
-    );
 
     //post to restAPI
     this.tournoiservice.createTournoi(this.newTournoi).subscribe(
@@ -36,12 +29,12 @@ export class CreateTournoiComponent implements OnInit {
       ()=> console.log("Succesfully added Tournois to database")
     );
 
-    console.log(this.nomEvenement);
+    // console.log(this.nomEvenement);
    }
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe(
-      (data) => this.events = data
+    this.evenementService.getEvenements().subscribe(
+      (data) => this.evenements = data
     );
   }
 

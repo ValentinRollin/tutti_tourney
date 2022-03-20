@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const events = require("./events");
+const events = require("./evenements");
 const tournois = require("./tournois");
 const equipes = require("./equipes");
 
@@ -27,13 +27,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/tuttiDB");
 
 //API evenements
-app.get("/events", events.getAll);
-app.post("/events", events.post);
-app.delete("/events", events.deleteAll);
-app.put("/events/:nomEvent", events.put);
+app.get("/evenements", events.getAll);
+app.post("/evenements", events.post);
+app.delete("/evenements", events.deleteAll);
+app.put("/evenements/:nomEvenement", events.put);
 
 //API tournois
 app.get("/tournois", tournois.getAll);
+app.get("/tournois/:nomEvenement", tournois.get);
 app.post("/tournois", tournois.post);
 app.delete("/tournois", tournois.deleteAll);
 

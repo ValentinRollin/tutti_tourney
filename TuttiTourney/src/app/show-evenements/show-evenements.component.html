@@ -1,0 +1,8 @@
+
+<div class="container">
+  <div class="evenement" *ngFor="let evenement of evenements" (click)="redirection(evenement.nom)">
+    <h2> {{ evenement.nom }} </h2>
+    <h3> {{ evenement.date | date: 'd MMMM yyyy' }} </h3>
+    <!-- <button (click)="redirection(evenement.nom)"> Voir les tournois</button> -->
+  </div>
+</div>

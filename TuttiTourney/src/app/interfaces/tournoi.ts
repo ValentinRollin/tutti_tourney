@@ -1,7 +1,7 @@
-import { Equipe } from "./equipe";
+import { Evenement } from "./evenement";
 
 export interface Tournoi {
   nom ?: string;
   sport ?: string;
-  equipes ?: Equipe;
+  evenement ?: Evenement;
 }

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Tournoi = require("./tournois");
 
 const equipeSchema = new mongoose.Schema({
     nom: {
@@ -12,7 +13,8 @@ const equipeSchema = new mongoose.Schema({
     niveau: {
       type : String,
       required : true
-    }
+    },
+    tournoi: Tournoi.tournoiModel.schema,
   });;
 
   const Equipe = mongoose.model("Equipe", equipeSchema);
@@ -35,6 +37,8 @@ exports.post = function (req, res) {
   const newEquipe = new Equipe({
     nom: req.body.nom,
     nbjoueur: req.body.nbjoueur,
+    niveau: req.body.niveau,
+    tournoi: req.body.tournoi,
   });
 
   newEquipe.save(function (error) {

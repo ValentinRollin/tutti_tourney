@@ -12,32 +12,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-evenement.component.scss'],
 })
 export class CreateEvenementComponent {
-  events: Evenement[] = [];
+  evenements: Evenement[] = [];
   newEvenement : Evenement = {};
 
-  constructor(private eventService: EvenementService, public route: Router) {}
+  constructor(private evenementService: EvenementService, public route: Router) {}
 
   onSubmit(): void {
 
-    // //ajout a la liste d'event
-    this.events.push(this.newEvenement);
+    // //ajout a la liste d'evenement
+    this.evenements.push(this.newEvenement);
 
     // //post to restAPI
-    this.eventService.createEvent(this.newEvenement).subscribe(
+    this.evenementService.createEvenement(this.newEvenement).subscribe(
       (data) => console.log(data),
       (error: any) => console.log(error),
-      ()=> console.log("Succesfully added Event to database")
+      ()=> console.log("Succesfully added Evenement to database")
     );
+
+    //redirection vers create-tournoi
+    this.redirection();
   }
 
   ngOnInit(): void {
-    // this.eventService.getEvents().subscribe(
+    // this.evenementService.getEvenements().subscribe(
     //   (data) => console.table(data)
     // );
   }
 
 //route
-  // redirection():void{
-  //   this.route.navigate(['/events']);
-  // }
+  redirection():void{
+    this.route.navigate(['/create-tournoi']);
+  }
 }

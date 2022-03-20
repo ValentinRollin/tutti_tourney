@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const tournoi = require('./tournois');
 
-const eventSchema = new mongoose.Schema({
+const evenementSchema = new mongoose.Schema({
   nom: {
     type: String,
     required: true
@@ -9,19 +8,18 @@ const eventSchema = new mongoose.Schema({
   date: {
     type: Date,
     //ajouter condition : date >= date du jour)
-  },
-  tournois: [tournoi.tournoiModel.schema],
+  }
 });
 
-const Event = mongoose.model("Event", eventSchema);
-
+const Evenement = mongoose.model("Evenement", evenementSchema);
+exports.evenementModel = Evenement;
 //GET ALL
 exports.getAll = function (req, res) {
-  Event.find(function (error, events) {
+  Evenement.find(function (error, evenements) {
     if (error) {
       res.send(error);
     } else {
-      res.send(events);
+      res.send(evenements);
     }
   });
 };
@@ -29,17 +27,17 @@ exports.getAll = function (req, res) {
 //POST
 exports.post = function (req, res) {
 
-  const newEvent = new Event({
+  const newEvenement = new Evenement({
     nom: req.body.nom,
     date: req.body.date,
   });
-  //console.log(newEvent);
+  //console.log(newEvenement);
 
-  newEvent.save(function (error) {
+  newEvenement.save(function (error) {
     if (error) {
       res.send(error);
     } else {
-      res.send("Ajout de l'event réussi.");
+      res.send("Ajout de l'evenement réussi.");
     }
   });
 };
@@ -47,13 +45,13 @@ exports.post = function (req, res) {
 //PUT
 exports.put = function (req, res) {
 
-  const name = req.params.nomEvent;
+  const name = req.params.nomEvenement;
   const tournoi = req.body;
-  Event.updateOne({nom: name}, {tournois: tournoi}, function (error) {
+  Evenement.updateOne({nom: name}, {tournois: tournoi}, function (error) {
     if (error) {
       res.send(error);
     } else {
-      res.send("Update de l'event réussi.");
+      res.send("Update de l'evenement réussi.");
     }
   });
 };
@@ -61,11 +59,11 @@ exports.put = function (req, res) {
 //DELETE ALL
 exports.deleteAll = function (req, res) {
 
-  Event.deleteMany(function (error) {
+  Evenement.deleteMany(function (error) {
     if (error) {
       res.send(error);
     } else {
-      res.send("Suppression des events réussi.");
+      res.send("Suppression des evenements réussi.");
     }
   });
 };
