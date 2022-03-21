@@ -4,9 +4,10 @@
     "\\TuttiTourney",
     "\\TuttiTourney\\src",
     "\\TuttiTourney\\src\\app",
-    "\\TuttiTourney\\src\\app\\create-equipe",
-    "\\TuttiTourney\\src\\app\\interfaces"
+    "\\TuttiTourney\\src\\app\\interfaces",
+    "\\TuttiTourney\\src\\app\\show-event",
+    "\\TuttiTourney\\src\\app\\show-tournoi"
   ],
-  "SelectedNode": "\\TuttiTourney\\src\\app\\create-equipe\\create-equipe.component.ts",
+  "SelectedNode": "\\TuttiTourney\\src\\app\\show-tournoi\\show-tournoi.component.ts",
   "PreviewInSolutionExplorer": false
 }

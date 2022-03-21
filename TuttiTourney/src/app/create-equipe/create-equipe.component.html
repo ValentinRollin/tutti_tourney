@@ -7,11 +7,10 @@
           <option *ngFor="let tournoi of tournois" [ngValue]="tournoi">{{ tournoi.evenement.nom }} -> {{ tournoi.nom }} </option>
         </select>
       </p>
-       <p> Nom de l'équipe : <input type="text" name="nom" [(ngModel)]="newEquipe.nom"></p>
-       <p> Nombre de joueur dans l'équipe : <input type="number" name="nbjoueur" [(ngModel)]="newEquipe.nbjoueur"></p>
-       <p> Niveau de l'équipe : <input type="text" name="niveau" [(ngModel)]="newEquipe.niveau"></p>
-       <input type="submit" value="Créer une équipe">
+      <p> Nom de l'équipe : <input type="text" name="nom" [(ngModel)]="newEquipe.nom"></p>
+      <p> Nombre de joueur dans l'équipe : <input type="number" name="nbjoueur" [(ngModel)]="newEquipe.nbjoueur"></p>
+      <p> Niveau de l'équipe : <input type="text" name="niveau" [(ngModel)]="newEquipe.niveau"></p>
+      <input type="submit" value="Créer une équipe">
      </form>
-
-   </div>
+  </div>
 </div>

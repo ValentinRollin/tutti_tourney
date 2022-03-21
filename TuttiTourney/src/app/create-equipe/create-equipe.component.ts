@@ -40,5 +40,4 @@ export class CreateEquipeComponent implements OnInit
       (data) => this.tournois = data
     );
   }
-
 }
