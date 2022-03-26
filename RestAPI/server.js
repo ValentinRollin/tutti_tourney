@@ -1,11 +1,8 @@
-//requires
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const events = require("./evenements");
-const tournois = require("./tournois");
-const equipes = require("./equipes");
+const evenement = require("./evenement.services");
 
 //express serveur
 const app = express();
@@ -18,30 +15,25 @@ app.use(express.static(__dirname));
 // Add headers before the routes are defined
 app.use(cors());
 
-// parse requests of content-type - application/json
+// parse les requetes de type - application/json
 app.use(bodyParser.json());
-// // parse requests of content-type - application/x-www-form-urlencoded
+// parse les requetes de type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Connexion mongodb
-mongoose.connect("mongodb://localhost:27017/tuttiDB");
+mongoose.connect("mongodb://localhost:27017/testDB");
 
 //API evenements
-app.get("/evenements", events.getAll);
-app.post("/evenements", events.post);
-app.delete("/evenements", events.deleteAll);
-app.put("/evenements/:nomEvenement", events.put);
+app.get("/evenements" , evenement.getAllEvenement);
+app.post("/evenements", evenement.postEvenement);
 
 //API tournois
-app.get("/tournois", tournois.getAll);
-app.get("/tournois/:nomEvenement", tournois.get);
-app.post("/tournois", tournois.post);
-app.delete("/tournois", tournois.deleteAll);
+app.get("/:evenement/tournois", evenement.getTournois);
+app.put("/evenements/:evenement", evenement.putTournoi);
 
 //API equipes
-app.get("/equipes", equipes.getAll);
-app.post("/equipes", equipes.post);
-app.delete("/equipes", equipes.deleteAll);
+app.get("/:evenement/:tournoi/equipes",evenement.getEquipes);
+app.put("/evenements/:evenement/:tournoi", evenement.putEquipe);
 
 // listen du serveur
 app.listen(3000, function () {

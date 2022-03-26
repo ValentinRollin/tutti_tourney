@@ -15,7 +15,7 @@ const equipeSchema = new mongoose.Schema({
       required : true
     },
     tournoi: Tournoi.tournoiModel.schema,
-  });;
+  });
 
   const Equipe = mongoose.model("Equipe", equipeSchema);
   exports.equipeModel = Equipe;
