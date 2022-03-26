@@ -3,6 +3,8 @@ import { Equipe } from '../interfaces/equipe';
 import { Router } from '@angular/router';
 import { EquipeService } from '../services/equipe.service';
 import { TournoiService } from '../services/tournois.service';
+import { Evenement } from '../interfaces/evenement';
+import { EvenementService } from '../services/evenement.service';
 
 @Component
 ({
@@ -15,18 +17,21 @@ export class CreateEquipeComponent implements OnInit
 {
   equipes: Equipe[] = [];
   newEquipe : Equipe = {};
+  evenements !: any[];
+  evenement : any ;
   tournois !: any[];
+  tournoi: any;
 
-  constructor(private equipeService: EquipeService, private tournoiservice: TournoiService, public route: Router){}
+  constructor(private equipeService: EquipeService, private evenementService: EvenementService, public route: Router){}
 
   onSubmit(): void
   {
 
-    // //ajout a la liste d'equipe
-    this.equipes.push(this.newEquipe);
+    console.log(this.evenement.nomEvenement);
+    console.log(this.tournoi.nomTournoi);
 
     // //post to restAPI
-    this.equipeService.createEquipe(this.newEquipe).subscribe
+    this.equipeService.addEquipe(this.newEquipe, this.evenement.nomEvenement, this.tournoi.nomTournoi).subscribe
     (
       (data) => console.log(data),
       (error: any) => console.log(error),
@@ -34,10 +39,14 @@ export class CreateEquipeComponent implements OnInit
     );
   }
 
-  ngOnInit(): void
-  {
-    this.tournoiservice.getTournois().subscribe(
-      (data) => this.tournois = data
+  ngOnInit(): void {
+    this.evenementService.getEvenements().subscribe(
+      (data) => this.evenements = data
     );
+  }
+
+  onChange(evenement : any): void{
+    this.tournois = evenement.tournois;
+    //console.log(this.tournois);
   }
 }

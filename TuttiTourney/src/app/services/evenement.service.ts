@@ -18,6 +18,7 @@ export class EvenementService {
     return this.http.get<Evenement[]>(this.apiUrl+'/evenements');
   }
 
+  //PAS MIS A JOUR
   getEvenement(name : string): Observable<Evenement>{
     return this.http.get<Evenement>(this.apiUrl + '/evenements' + name);
   }
@@ -32,16 +33,17 @@ export class EvenementService {
       });
   }
 
-  updateEvenement(nomEvenement: String, tournoi:Tournoi): Observable<Evenement>{
-    const headers = { 'content-type': 'application/json' };
-    const path = nomEvenement;
-    //console.log(evenement)
-    const body = JSON.stringify(tournoi);
-    console.log(body);
-    return this.http.put<Evenement>(this.apiUrl+'/evenements/'+path, body,
-    {
-      headers: headers,
-      });
-  }
+  //PAS MIS A JOUR
+  // updateEvenement(nomEvenement: String, tournoi:Tournoi): Observable<Evenement>{
+  //   const headers = { 'content-type': 'application/json' };
+  //   const path = nomEvenement;
+  //   //console.log(evenement)
+  //   const body = JSON.stringify(tournoi);
+  //   console.log(body);
+  //   return this.http.put<Evenement>(this.apiUrl+'/evenements/'+path, body,
+  //   {
+  //     headers: headers,
+  //     });
+  // }
 
 }

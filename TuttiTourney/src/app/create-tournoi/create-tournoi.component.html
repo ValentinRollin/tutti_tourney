@@ -3,11 +3,11 @@
      <form (ngSubmit)="onSubmit()">
       <p>
         Nom de l'evenement :
-        <select name="nomEvent" [(ngModel)]="newTournoi.evenement">
-          <option *ngFor="let evenement of evenements" [ngValue]="evenement">{{ evenement.nom }}</option>
+        <select name="nomEvent" [(ngModel)]="evenement">
+          <option *ngFor="let evenement of evenements" [ngValue]="evenement">{{ evenement.nomEvenement }}</option>
         </select>
       </p>
-       <p> Nom du tournoi : <input type="text" name="nom" [(ngModel)]="newTournoi.nom"></p>
+       <p> Nom du tournoi : <input type="text" name="nom" [(ngModel)]="newTournoi.nomTournoi"></p>
        <p> Sport du tournoi : <input type="text" name="sport" [(ngModel)]="newTournoi.sport"></p>
        <input type="submit" value="Créer un tournoi">
      </form>

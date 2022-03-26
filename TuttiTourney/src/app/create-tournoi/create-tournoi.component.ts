@@ -16,20 +16,20 @@ export class CreateTournoiComponent implements OnInit {
   tournois: Tournoi[] = [];
   newTournoi : Tournoi = {};
   evenements !: any[];
-  nomEvenement : String = "";
+  evenement : Evenement = {};
 
   constructor(private tournoiservice: TournoiService, public route: Router, private evenementService: EvenementService) {}
 
   onSubmit(): void {
 
     //post to restAPI
-    this.tournoiservice.createTournoi(this.newTournoi).subscribe(
+    this.tournoiservice.addTournoi(this.newTournoi, this.evenement.nomEvenement ).subscribe(
       (data) => console.log(data),
       (error: any) => console.log(error),
       ()=> console.log("Succesfully added Tournois to database")
     );
 
-    // console.log(this.nomEvenement);
+//    console.log(this.evenement.nomEvenement);
    }
 
   ngOnInit(): void {

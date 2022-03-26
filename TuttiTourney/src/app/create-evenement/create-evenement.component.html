@@ -1,8 +1,9 @@
  <div class="container">
    <div class="create-evenement">
       <form (ngSubmit)="onSubmit()">
-        <p> Nom de l'événement : <input type="text" name="nom" [(ngModel)]="newEvenement.nom"></p>
+        <p> Nom de l'événement : <input type="text" name="nom" [(ngModel)]="newEvenement.nomEvenement"></p>
         <p> Date de l'événement : <input type="date" name="date" [(ngModel)]="newEvenement.date"></p>
+        <p> Description (optionnel) : <input type="text" name="description" [(ngModel)]="newEvenement.description"></p>
         <input type="submit" value="Créer événement">
       </form>
     </div>

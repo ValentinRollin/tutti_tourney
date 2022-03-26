@@ -17,7 +17,7 @@ export class ShowTournoiComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this.tournoiService.getTournoi( this.nomEvenement ).subscribe
+    this.tournoiService.getTournois( this.nomEvenement ).subscribe
     (
       (data) => this.tournois = data
     );

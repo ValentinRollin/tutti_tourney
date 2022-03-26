@@ -1,5 +1,8 @@
+import { Tournoi } from "./tournoi";
 
 export interface Evenement {
-  nom ?: string;
+  nomEvenement ?: string;
   date ?: Date;
+  description?: string;
+  tournois ?: Tournoi[];
 }

@@ -5,6 +5,7 @@ const evenementSchema = new mongoose.Schema({
   nomEvenement: {
     type: String,
     required: true,
+    unique: true
   },
   date: {
     type: Date,

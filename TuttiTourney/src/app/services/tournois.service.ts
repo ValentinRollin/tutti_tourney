@@ -13,19 +13,22 @@ export class TournoiService {
 
   constructor(private http: HttpClient) { }
 
-  getTournois(): Observable<Tournoi[]>{
-    return this.http.get<Tournoi[]>(this.apiUrl+'/tournois');
+  getTournois(nomEvenement : any): Observable<Tournoi[]>{
+    return this.http.get<Tournoi[]>(this.apiUrl+'/'+ nomEvenement +'/tournois');
   }
 
+  //PAS MIS A JOUR {
   getTournoi(name : any): Observable<Tournoi[]>{
     return this.http.get<Tournoi[]>(this.apiUrl + '/tournois/' + name);
   }
+  //PAS MIS A JOUR }
 
-  createTournoi(tournoi: Tournoi): Observable<Tournoi>{
+  addTournoi(tournoi: Tournoi, nomEvenement : any): Observable<Tournoi>{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(tournoi);
     console.log(body);
-    return this.http.post<Tournoi>(this.apiUrl+'/tournois', body,
+    console.log(nomEvenement);
+    return this.http.put<Tournoi>(this.apiUrl+'/evenements/'+nomEvenement, body,
     {
       headers: headers,
       });

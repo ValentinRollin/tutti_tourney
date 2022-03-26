@@ -16,7 +16,7 @@ exports.getAllEvenement = function (req, res) {
 //Appel GET pour tout les tournois d'un evenement
 exports.getTournois = function (req, res) {
   const name = req.params.evenement;
-  Evenement.findOne({ evenement: name }, function (error, evenement) {
+  Evenement.findOne({ nomEvenement: name }, function (error, evenement) {
     if (error) {
       res.send(error);
     } else {
@@ -29,7 +29,7 @@ exports.getEquipes = function (req, res) {
   const evenementName = req.params.evenement;
   const tournoiName = req.params.tournoi;
   Evenement.findOne(
-    { evenement: evenementName, "tournois.tournoi": tournoiName },
+    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
     function (error, evenement) {
       if (error) {
         res.send(error);
@@ -64,8 +64,9 @@ exports.putTournoi= function(req, res) {
   const name = req.params.evenement;
   const tournoi = req.body;
   Evenement.updateOne(
-    { evenement: name },
+    { nomEvenement: name },
     { $push: { tournois: tournoi } },
+    { runValidators: true },
     function (error) {
       if (error) {
         res.send(error);
@@ -82,8 +83,9 @@ exports.putEquipe= function(req, res) {
   const tournoiName = req.params.tournoi;
   const equipe = req.body;
   Evenement.updateOne(
-    { evenement: evenementName, "tournois.tournoi": tournoiName },
+    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
     { $push: { "tournois.$.equipes": equipe } },
+    { runValidators: true },
     function (error) {
       if (error) {
         res.send(error);

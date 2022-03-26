@@ -23,6 +23,7 @@ export class ShowEvenementsComponent implements OnInit {
 
   redirection(nom : string): void
   {
+    console.log(nom);
     this.route.navigate(["/tournois",nom]);
   }
 

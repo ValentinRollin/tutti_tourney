@@ -13,19 +13,21 @@ export class EquipeService {
 
   constructor(private http: HttpClient) { }
 
-  getEquipes(): Observable<Equipe[]>{
-    return this.http.get<Equipe[]>(this.apiUrl+'/equipes');
+  getEquipes(nomEvenement:any, nomTournoi:any): Observable<Equipe[]>{
+    return this.http.get<Equipe[]>(this.apiUrl+'/' + nomEvenement + '/' + nomTournoi + '/equipes');
   }
 
+//PAS MIS A JOUR {
   getEquipe(name : string): Observable<Equipe>{
     return this.http.get<Equipe>(this.apiUrl + '/equipes' + name);
   }
+//PAS MIS A JOUR }
 
-  createEquipe(equipe: Equipe): Observable<Equipe>{
+  addEquipe(equipe: Equipe, nomEvenement: any, nomTournoi: any): Observable<Equipe>{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(equipe);
     console.log(body);
-    return this.http.post<Equipe>(this.apiUrl+'/equipes', body,
+    return this.http.put<Equipe>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi, body,
     {
       headers: headers,
       });
