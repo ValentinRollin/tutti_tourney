@@ -7,6 +7,9 @@ body {
   border: 0;
   font-family: "Tenor Sans", sans-serif;
   font-size: 1rem;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #2B2E4A;
 }
 
 input[type=text], input[type=number], input[type=date], select {

@@ -13,7 +13,7 @@ export class ShowTournoiComponent implements OnInit {
   constructor(private tournoiService: TournoiService, public route: Router,  public activeRoute: ActivatedRoute) { }
 
   tournois !: Tournoi[];
-  nomEvenement : string | null = this.activeRoute.snapshot.paramMap.get('nom')
+  nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
 
   ngOnInit(): void
   {
@@ -24,9 +24,15 @@ export class ShowTournoiComponent implements OnInit {
 
   }
 
-  redirection(): void
+  redirectionInscriptionEquipe(nomEvenement : any, nomTournoi : any): void
   {
+    console.log(nomEvenement);
+    console.log(nomTournoi);
+    this.route.navigate(["/create-equipe", nomEvenement, nomTournoi]);
+  }
 
+  redirectionOrganisation(nomEvenement : any, nomTournoi : any) : void {
+    this.route.navigate(["/organisation", nomEvenement, nomTournoi]);
   }
 
 }

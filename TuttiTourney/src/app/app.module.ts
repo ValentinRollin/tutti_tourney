@@ -11,6 +11,7 @@ import { CreateTournoiComponent } from './create-tournoi/create-tournoi.componen
 import { CreateEquipeComponent } from './create-equipe/create-equipe.component';
 import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
 import { ShowEvenementsComponent } from './show-evenements/show-evenements.component';
+import { OrganisationTournoiComponent } from './organisation-tournoi/organisation-tournoi.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ShowEvenementsComponent } from './show-evenements/show-evenements.compo
     CreateTournoiComponent,
     CreateEquipeComponent,
     ShowTournoiComponent,
-    ShowEvenementsComponent
+    ShowEvenementsComponent,
+    OrganisationTournoiComponent
   ],
   imports: [
     BrowserModule,

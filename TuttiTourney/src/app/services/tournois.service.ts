@@ -18,8 +18,8 @@ export class TournoiService {
   }
 
   //PAS MIS A JOUR {
-  getTournoi(name : any): Observable<Tournoi[]>{
-    return this.http.get<Tournoi[]>(this.apiUrl + '/tournois/' + name);
+  getTournoi(nomEvenement : any, nomTournoi : any): Observable<Tournoi>{
+    return this.http.get<Tournoi>(this.apiUrl + '/evenements/' + nomEvenement + '/' + nomTournoi);
   }
   //PAS MIS A JOUR }
 

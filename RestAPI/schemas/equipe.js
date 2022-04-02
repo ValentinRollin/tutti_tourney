@@ -10,8 +10,9 @@ const equipeSchema = new mongoose.Schema({
     required: true,
   },
   niveau: {
-    type: String,
+    type: Number,
     required: true,
+    max: 10
   },
   description: {
     type: String,

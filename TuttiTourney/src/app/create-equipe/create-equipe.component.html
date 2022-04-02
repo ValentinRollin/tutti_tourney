@@ -1,20 +1,10 @@
 <div class="container">
   <div class="create-equipe">
      <form (ngSubmit)="onSubmit()">
-      <p>
-        Nom de l'evenement :
-        <select name="nomEvent" [(ngModel)]="evenement" (change)="onChange(evenement)">
-          <option *ngFor="let evenement of evenements" [ngValue]="evenement">{{ evenement.nomEvenement }}</option>
-        </select>
 
-        Nom du tournoi :
-        <select name="nomTournois" [(ngModel)]="tournoi">
-          <option *ngFor="let tournoi of tournois" [ngValue]="tournoi"> {{ tournoi.nomTournoi }} </option>
-        </select>
-      </p>
       <p> Nom de l'équipe : <input type="text" name="nomEquipe" [(ngModel)]="newEquipe.nomEquipe"></p>
       <p> Nombre de joueur dans l'équipe : <input type="number" name="nbjoueur" [(ngModel)]="newEquipe.nbjoueur"></p>
-      <p> Niveau de l'équipe : <input type="text" name="niveau" [(ngModel)]="newEquipe.niveau"></p>
+      <p> Niveau (de 1 (Pro) à 10 (Debutant)) : <input type="number" name="niveau" [(ngModel)]="newEquipe.niveau"></p>
       <p> Description : (optionnel) <input type="text" name="descriptionEquipe" [(ngModel)]="newEquipe.description"></p>
       <input type="submit" value="Créer une équipe">
      </form>

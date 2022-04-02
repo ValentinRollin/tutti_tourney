@@ -24,6 +24,23 @@ exports.getTournois = function (req, res) {
     }
   });
 };
+//Appel GET pour UN tournoi en particulier
+exports.getTournoi = function (req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  Evenement.findOne({ nomEvenement: evenementName, "tournois.nomTournoi": tournoiName}, function (error, evenement) {
+    if (error) {
+      res.send(error);
+    } else {
+      let tournoi = evenement.tournois.find(
+        (tournoi) => tournoi.nomTournoi === tournoiName
+      );
+      res.send(tournoi);
+    }
+  });
+};
+
+
 //Appel GET pour toutes les equipes d'un tournoi
 exports.getEquipes = function (req, res) {
   const evenementName = req.params.evenement;
@@ -34,14 +51,36 @@ exports.getEquipes = function (req, res) {
       if (error) {
         res.send(error);
       } else {
-        let tournois = evenement.tournois.find(
-          (tournoi) => tournoi.nom === tournoiName
+        let tournoi = evenement.tournois.find(
+          (tournoi) => tournoi.nomTournoi === tournoiName
         );
-        res.send(tournois.equipes);
+        let equipes = (tournoi.equipes).sort((a,b) => (a.niveau > b.niveau) ? 1 : ((b.niveau > a.niveau) ? -1 : 0));
+        res.send(equipes);
       }
     }
   );
 }
+
+//Appel GET pour toutes les poules d'un tournoi
+exports.getPoules = function (req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  Evenement.findOne(
+    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
+    function (error, evenement) {
+      if (error) {
+        res.send(error);
+      } else {
+        let tournoi = evenement.tournois.find(
+          (tournoi) => tournoi.nomTournoi === tournoiName
+        );
+        let poules = (tournoi.poules);
+        res.send(poules);
+      }
+    }
+  );
+}
+
 
 //Appel pour POST un evenement (sans les tournois)
 exports.postEvenement= function (req, res) {
@@ -60,7 +99,7 @@ exports.postEvenement= function (req, res) {
 }
 
 //Appel PUT pour ajouter un tournoi à un évenement
-exports.putTournoi= function(req, res) {
+exports.pushTournoi= function(req, res) {
   const name = req.params.evenement;
   const tournoi = req.body;
   Evenement.updateOne(
@@ -78,7 +117,7 @@ exports.putTournoi= function(req, res) {
 }
 
 //Appel PUT pour ajouter une équipe à un tournoi
-exports.putEquipe= function(req, res) {
+exports.pushEquipe= function(req, res) {
   const evenementName = req.params.evenement;
   const tournoiName = req.params.tournoi;
   const equipe = req.body;
@@ -91,6 +130,44 @@ exports.putEquipe= function(req, res) {
         res.send(error);
       } else {
         res.send("Update de l'equipe réussi");
+      }
+    }
+  );
+}
+
+//Appel PUT pour ajouter une ajouter à un tournoi
+exports.pushPoule= function(req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  const poule = req.body;
+  Evenement.updateOne(
+    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
+    { $push: { "tournois.$.poules": poule } },
+    { runValidators: true },
+    function (error) {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send("Update de les poules réussi");
+      }
+    }
+  );
+}
+
+//Appel PUT pour ajouter une ajouter à un tournoi
+exports.updatePoule= function(req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  const poule = req.body;
+  Evenement.updateOne(
+    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
+    {  "tournois.poules": poule },
+    { runValidators: true },
+    function (error) {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send("Update de les poules réussi");
       }
     }
   );

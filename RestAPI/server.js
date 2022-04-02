@@ -29,11 +29,17 @@ app.post("/evenements", evenement.postEvenement);
 
 //API tournois
 app.get("/:evenement/tournois", evenement.getTournois);
-app.put("/evenements/:evenement", evenement.putTournoi);
+app.get("/evenements/:evenement/:tournoi", evenement.getTournoi);
+app.put("/evenements/:evenement", evenement.pushTournoi);
 
 //API equipes
 app.get("/:evenement/:tournoi/equipes",evenement.getEquipes);
-app.put("/evenements/:evenement/:tournoi", evenement.putEquipe);
+app.put("/evenements/:evenement/:tournoi", evenement.pushEquipe);
+
+//API Poules
+app.get("/:evenement/:tournoi/poules",evenement.getPoules);
+app.put("/evenements/:evenement/:tournoi/poules", evenement.pushPoule);
+app.put("/evenements/:evenement/:tournoi/poules/update", evenement.updatePoule);
 
 // listen du serveur
 app.listen(3000, function () {

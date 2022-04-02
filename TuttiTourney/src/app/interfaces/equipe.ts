@@ -4,6 +4,6 @@ export interface Equipe
 {
   nomEquipe ?: string;
   nbjoueur ?: number;
-  niveau?: string;
+  niveau?: number;
   description?: string;
 }

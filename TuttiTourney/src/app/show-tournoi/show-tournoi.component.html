@@ -1,7 +1,10 @@
 <div class="container">
-  <div class="tournoi" *ngFor="let tournoi of tournois" (click)="redirection()">
+  <div class="tournoi" *ngFor="let tournoi of tournois">
     <h2> {{ tournoi.nomTournoi }} </h2>
     <h3> {{ tournoi.sport }} </h3>
     <p> {{ tournoi.description }} </p>
+
+    <button (click)="redirectionInscriptionEquipe(nomEvenement, tournoi.nomTournoi)"> Inscrire une équipe </button>
+    <button  (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button>
   </div>
 </div>
