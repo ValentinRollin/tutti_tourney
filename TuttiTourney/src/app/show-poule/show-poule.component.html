@@ -1,0 +1,28 @@
+<div class="container">
+
+  <div class="poule" *ngIf= "poules[0].equipes?.length==0">
+    <ul> Liste des équipes dans le tournoi
+
+      <ng-container *ngFor="let equipe of equipes">
+       <li>
+         {{ equipe.nomEquipe }}
+       </li>
+      </ng-container>
+
+    </ul>
+      <button (click)="attributionPoule(equipes, poules)"> Attribuer les équipes </button>
+
+  </div>
+
+  <ng-container *ngFor="let poule of poules">
+
+    <div class="poule" *ngIf="poule.equipes?.length != 0">
+      <h2> Poule numéro : {{poule.numeroPoule}}</h2>
+      <h3> Equipes : </h3>
+      <ng-container *ngFor="let equipe of poule.equipes">
+        <p> {{equipe.nomEquipe}} | niveau : {{equipe.niveau}}</p>
+      </ng-container>
+    </div>
+  </ng-container>
+
+</div>

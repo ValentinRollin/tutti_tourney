@@ -161,7 +161,7 @@ exports.updatePoule= function(req, res) {
   const poule = req.body;
   Evenement.updateOne(
     { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
-    {  "tournois.poules": poule },
+    {  "tournois.$.poules": poule },
     { runValidators: true },
     function (error) {
       if (error) {

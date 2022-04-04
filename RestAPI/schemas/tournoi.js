@@ -20,6 +20,11 @@ const tournoiSchema = new mongoose.Schema({
   },
   poules : {
       type : [poule.pouleSchema]
+  },
+  etat : {
+    type : Number,
+    enum : [ 0, 1, 2],
+    default : 0 
   }
 });
 
