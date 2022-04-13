@@ -9,9 +9,15 @@ const matchSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  score: {
-    type: String,
+  scoreEquipe1: {
+    type: Number,
     required: false,
+    default: 0
+  },
+  scoreEquipe2: {
+    type: Number,
+    required: false,
+    default: 0
   },
   fini: {
     type: Boolean,

@@ -5,6 +5,7 @@ import { Poule } from '../interfaces/poule';
 import { Tournoi } from '../interfaces/tournoi';
 import { EquipeService } from '../services/equipe.service';
 import { PouleService } from '../services/poule.service';
+import { TournoiService } from '../services/tournois.service';
 
 @Component({
   selector: 'app-show-poule',
@@ -22,7 +23,7 @@ export class ShowPouleComponent implements OnInit {
 
   nombrePoule !: number;
 
-  constructor(private pouleService: PouleService, private equipeService: EquipeService, public route: Router, public activeRoute : ActivatedRoute) { }
+  constructor(private pouleService: PouleService, private equipeService: EquipeService, private tournoiService: TournoiService, public route: Router, public activeRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -36,16 +37,9 @@ export class ShowPouleComponent implements OnInit {
       (data) => this.poules = data
     );
 
-    this.equipeService.getEquipes( this.nomEvenement, this.nomTournoi ).subscribe
-    (
-      (data) => this.equipes = data
-    );
-
   }
 
   attributionPoule(equipes : Equipe[],  poules: Poule[]) : void {
-
-    console.log(equipes);
 
     let nombrePoule = poules.length;
     let i : number = 0;
@@ -74,8 +68,6 @@ export class ShowPouleComponent implements OnInit {
       }
     }
 
-    this.tournoi.etat = 1;
-
     this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi).subscribe
     (
       (data) => console.log(data),
@@ -83,6 +75,26 @@ export class ShowPouleComponent implements OnInit {
       ()=> console.log("Succesfully updated poules to database")
     );
 
+    console.log("je change l'etat")
+    this.tournoi.etat = 1;
+    this.tournoiService.updateTournoi(this.tournoi, this.nomTournoi, this.nomEvenement).subscribe
+    (
+      (data) => console.log(data),
+      (error: any) => console.log(error),
+      ()=> console.log("Succesfully updated poules to database")
+    );
+  }
+
+  genererMatch(poules:Poule[]):void{
+    for (let poule of poules){
+      let n:number =poule.equipes!.length;
+
+      for (let i = 0; i< n - 1; i++){
+        for (let j = i+1; j< n  ; j++){
+          console.log(poule.equipes![i].nomEquipe+" Versus "+ poule.equipes![j].nomEquipe);
+        }
+      }
+    }
   }
 
 }

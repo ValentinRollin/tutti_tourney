@@ -31,6 +31,7 @@ app.post("/evenements", evenement.postEvenement);
 app.get("/:evenement/tournois", evenement.getTournois);
 app.get("/evenements/:evenement/:tournoi", evenement.getTournoi);
 app.put("/evenements/:evenement", evenement.pushTournoi);
+app.put("/evenements/:evenement/:tournoi/updateEtat", evenement.updateEtatTournoi);
 
 //API equipes
 app.get("/:evenement/:tournoi/equipes",evenement.getEquipes);

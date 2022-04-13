@@ -33,4 +33,14 @@ export class TournoiService {
       headers: headers,
       });
   }
+
+  updateTournoi(tournoi:Tournoi, nomTournoi: any, nomEvenement: any): Observable<Tournoi>{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(tournoi);
+    console.log(body);
+    return this.http.put<Tournoi>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi+'/updateEtat', body,
+    {
+      headers: headers,
+      });
+  }
 }

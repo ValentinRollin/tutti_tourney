@@ -1,3 +1,8 @@
+<ng-container *ngIf="poules">
+
+
+  <button (click)="genererMatch(poules)" *ngIf= "poules[0].equipes!.length!=0"> Les poules me conviennent </button>
+
 <div class="container">
 
   <div class="poule" *ngIf= "poules[0].equipes?.length==0">
@@ -26,3 +31,5 @@
   </ng-container>
 
 </div>
+
+</ng-container>
