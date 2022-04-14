@@ -7,6 +7,8 @@ import { OrganisationTournoiComponent } from './organisation-tournoi/organisatio
 import { ShowEvenementsComponent } from './show-evenements/show-evenements.component';
 import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+
 
 const routes: Routes = [
   { path : '', redirectTo:'/home', pathMatch:'full' },
@@ -17,7 +19,8 @@ const routes: Routes = [
   { path: 'evenements', component: ShowEvenementsComponent },
   { path: 'tournois/:nomEvenement', component: ShowTournoiComponent },
   { path: 'organisation/:nomEvenement/:nomTournoi', component: OrganisationTournoiComponent },
-  { path: 'poules/:nomEvenement/:nomTournoi', component: ShowPouleComponent }
+  { path: 'poules/:nomEvenement/:nomTournoi', component: ShowPouleComponent },
+  { path: 'create-user', component: CreateUserComponent}
 ];
 
 @NgModule({
