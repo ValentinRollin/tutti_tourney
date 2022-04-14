@@ -1,6 +1,6 @@
 export interface User {
-  pseudo?: string;
-  mdp?: string;
+  username?: string;
+  password?: string;
   role?: string;
   email?: string;
 }

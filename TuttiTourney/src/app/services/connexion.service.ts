@@ -8,28 +8,25 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 
-export class InscriptionService
-{
+export class ConnexionService {
 
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
-  getUser(): Observable<User[]>
-  {
-    return this.http.get<User[]>(this.apiUrl + '/api/auth/signup');
+  getUser(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl + '/api/auth/signin');
   }
 
-  createUser(evenement: User): Observable<User>
-  {
+  connectUser(evenement: User): Observable<User> {
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(evenement);
     console.log(body);
 
-    return this.http.post<User>(this.apiUrl + '/api/auth/signup', body,
-    {
-      headers: headers,
-    });
+    return this.http.post<User>(this.apiUrl + '/api/auth/signin', body,
+      {
+        headers: headers,
+      });
   }
 
 }

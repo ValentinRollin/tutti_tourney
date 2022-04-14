@@ -14,6 +14,7 @@ import { ShowEvenementsComponent } from './show-evenements/show-evenements.compo
 import { OrganisationTournoiComponent } from './organisation-tournoi/organisation-tournoi.component';
 import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     ShowEvenementsComponent,
     OrganisationTournoiComponent,
     ShowPouleComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ConnexionUserComponent
   ],
   imports: [
     BrowserModule,
