@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../interfaces/user'
-import { InscriptionService } from '../services/inscription.service';
+import { ConnexionService } from '../services/connexion.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,32 +12,29 @@ import { Router } from '@angular/router';
 export class CreateUserComponent implements OnInit
 {
 
-  newUser: User = {};
-
-  constructor(private inscriptionService: InscriptionService, public route: Router) { }
-
-  onSubmit(): void {
-
-    // //post to restAPI
-    this.inscriptionService.createUser(this.newUser).subscribe(
-      (data) => console.log(data),
-      (error: any) => console.log(error),
-      () => console.log("Succesfully added User to database")
-    );
-
-    //redirection vers create-tournoi
-    this.redirection();
-  }
-
+  form: any = {
+    username: null,
+    email: null,
+    password: null
+  };
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+  constructor(private authService: ConnexionService) { }
   ngOnInit(): void {
-    // this.evenementService.getEvenements().subscribe(
-    //   (data) => console.table(data)
-    // );
   }
-
-  //route
-  redirection(): void {
-    this.route.navigate(['/create-user']);
+  onSubmit(): void {
+    const { username, email, password } = this.form;
+    this.authService.register(username, email, password).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
   }
-
 }

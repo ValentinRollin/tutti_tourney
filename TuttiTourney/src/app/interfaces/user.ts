@@ -3,4 +3,5 @@ export interface User {
   password?: string;
   role?: string;
   email?: string;
+  accessToken?:string;
 }

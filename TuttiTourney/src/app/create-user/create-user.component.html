@@ -1,9 +1,9 @@
 <div class="container">
   <div class="create-user">
     <form (ngSubmit)="onSubmit()">
-      <p> Pseudonyme : <input type="text" name="pseudo" [(ngModel)]="newUser.username"></p>
-      <p> Mot de Passe : <input type="password" name="mdp" [(ngModel)]="newUser.password"></p>
-      <p> Email : <input type="email" name="email" [(ngModel)]="newUser.email"></p>
+      <p> Pseudonyme : <input type="text" name="pseudo" [(ngModel)]="form.username"></p>
+      <p> Mot de Passe : <input type="password" name="mdp" [(ngModel)]="form.password"></p>
+      <p> Email : <input type="email" name="email" [(ngModel)]="form.email"></p>
 
       <input type="submit" value="S'inscrire">
     </form>

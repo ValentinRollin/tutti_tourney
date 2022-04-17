@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -13,20 +16,21 @@ export class ConnexionService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
-
-  getUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl + '/api/auth/signin');
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.apiUrl + '/api/auth/signin', {
+      username,
+      password
+    }, httpOptions);
   }
-
-  connectUser(evenement: User): Observable<User> {
-    const headers = { 'content-type': 'application/json' };
-    const body = JSON.stringify(evenement);
-    console.log(body);
-
-    return this.http.post<User>(this.apiUrl + '/api/auth/signin', body,
-      {
-        headers: headers,
-      });
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(this.apiUrl + '/api/auth/signup', {
+      username,
+      email,
+      password
+    }, httpOptions);
   }
 
 }
+
+
+

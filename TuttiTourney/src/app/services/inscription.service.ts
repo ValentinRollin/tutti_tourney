@@ -30,6 +30,17 @@ export class InscriptionService
     {
       headers: headers,
     });
+    
+  }
+  connectUser(evenement: User): Observable<User> {
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(evenement);
+    console.log(body);
+
+    return this.http.post<User>(this.apiUrl + '/api/auth/signin', body,
+      {
+        headers: headers,
+      });
   }
 
 }

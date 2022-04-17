@@ -9,6 +9,7 @@ import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'organisation/:nomEvenement/:nomTournoi', component: OrganisationTournoiComponent },
   { path: 'poules/:nomEvenement/:nomTournoi', component: ShowPouleComponent },
   { path: 'create-user', component: CreateUserComponent },
-  { path: 'connexion-user', component: ConnexionUserComponent }
+  { path: 'connexion-user', component: ConnexionUserComponent },
 ];
 
 @NgModule({
