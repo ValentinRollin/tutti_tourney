@@ -15,6 +15,8 @@ import { OrganisationTournoiComponent } from './organisation-tournoi/organisatio
 import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { MesTournoisComponent } from './mes-tournois/mes-tournois.component';
 import { GererTournoiComponent } from './gerer-tournoi/gerer-tournoi.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { GererTournoiComponent } from './gerer-tournoi/gerer-tournoi.component';
     OrganisationTournoiComponent,
     ShowPouleComponent,
     MesTournoisComponent,
-    GererTournoiComponent
+    GererTournoiComponent,
+    CreateUserComponent,
+    ConnexionUserComponent
   ],
   imports: [
     BrowserModule,

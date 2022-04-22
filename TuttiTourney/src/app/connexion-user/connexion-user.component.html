@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="connexion-user">
+    <form (ngSubmit)="onSubmit()">
+      <p> Pseudonyme : <input type="text" name="pseudo" [(ngModel)]="form.username"></p>
+      <p> Mot de Passe : <input type="password" name="mdp" [(ngModel)]="form.password"></p>
+
+      <input type="submit" value="Se connecter">
+    </form>
+  </div>
+</div>
+
