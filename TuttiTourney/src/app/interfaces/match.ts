@@ -5,6 +5,8 @@ export interface Match
 {
   nomEquipe1 ?: string;
   nomEquipe2 ?: string;
-  score ?: string;
+  scoreEquipe1 ?: number;
+  scoreEquipe2 ?: number;
   finis ?: boolean;
+  vainqueur?:string;
 }

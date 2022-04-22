@@ -26,8 +26,6 @@ export class ShowTournoiComponent implements OnInit {
 
   redirectionInscriptionEquipe(nomEvenement : any, nomTournoi : any): void
   {
-    console.log(nomEvenement);
-    console.log(nomTournoi);
     this.route.navigate(["/create-equipe", nomEvenement, nomTournoi]);
   }
 

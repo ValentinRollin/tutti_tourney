@@ -14,7 +14,7 @@ import { TournoiService } from '../services/tournois.service';
 export class CreateTournoiComponent implements OnInit {
 
   tournois: Tournoi[] = [];
-  newTournoi : Tournoi = {};
+  newTournoi : Tournoi = {tours : []};
   evenements !: any[];
   evenement : Evenement = {};
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Equipe } from '../interfaces/equipe';
 import { Poule } from '../interfaces/poule';
+import { Tour } from '../interfaces/tour';
 import { Tournoi } from '../interfaces/tournoi';
-import { EquipeService } from '../services/equipe.service';
 import { PouleService } from '../services/poule.service';
+import { TourService } from '../services/tour.service';
 import { TournoiService } from '../services/tournois.service';
 
 @Component({
@@ -14,16 +14,17 @@ import { TournoiService } from '../services/tournois.service';
 })
 export class OrganisationTournoiComponent implements OnInit {
 
-  tournoi : Tournoi = {};
+  tournoi : Tournoi = { tours : []};
   equipes : any[] = [];
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
   nomTournoi : any = this.activeRoute.snapshot.paramMap.get('nomTournoi');
 
+  newTour: Tour = {};
   newPoule : Poule = {};
   poules : Poule[] = [];
   nombrePoule !: Number;
 
-  constructor(private tournoiService: TournoiService, private pouleService: PouleService,
+  constructor(private tournoiService: TournoiService, private tourService: TourService, private pouleService: PouleService,
     public route: Router, public activeRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -33,23 +34,31 @@ export class OrganisationTournoiComponent implements OnInit {
       (data) => this.tournoi = data
     );
 
-    this.pouleService.getPoules( this.nomEvenement, this.nomTournoi ).subscribe
-    (
-      (data) => this.poules = data
-    );
   }
 
   onSubmit() : void{
-    console.log(this.equipes);
 
+    this.tourInit();
     this.ajoutNbPoule(this.nombrePoule);
-
     this.redirectionPoule(this.nomEvenement, this.nomTournoi);
 
   }
 
   redirectionPoule(nomEvenement : any, nomTournoi : any) : void {
     this.route.navigate([ "/poules", nomEvenement, nomTournoi, ]);
+  }
+  tourInit(): void{
+
+    this.newTour = {
+      numeroTour : 1
+    }
+
+    this.tourService.addTour(this.newTour,this.nomEvenement, this.nomTournoi).subscribe
+    (
+        (data) => console.log(data),
+        (error: any) => console.log(error),
+        ()=> console.log("Succesfully updated poules to database")
+      );
   }
 
   ajoutNbPoule(nombrePoule : Number): void {
@@ -58,7 +67,7 @@ export class OrganisationTournoiComponent implements OnInit {
         numeroPoule : i
       }
       console.log(this.newPoule);
-      this.pouleService.addPoule(this.newPoule, this.nomEvenement, this.nomTournoi).subscribe
+      this.pouleService.addPoule(this.newPoule, this.nomEvenement, this.nomTournoi, this.newTour.numeroTour).subscribe
       (
         (data) => console.log(data),
         (error: any) => console.log(error),

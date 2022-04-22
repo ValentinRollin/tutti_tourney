@@ -1,11 +1,11 @@
 import { Equipe } from "./equipe";
-import { Poule } from "./poule";
+import { Tour } from "./tour";
 
 export interface Tournoi {
   nomTournoi ?: string;
   sport ?: string;
   description?: string;
   equipes ?: Equipe[];
-  poules ?: Poule[];
+  tours : Tour[];
   etat ?: number;
 }

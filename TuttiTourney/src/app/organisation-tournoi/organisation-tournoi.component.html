@@ -3,12 +3,15 @@
     <h2> {{ tournoi.nomTournoi }} </h2>
     <h3> {{ tournoi.sport }} </h3>
     <p> {{ tournoi.description }} </p>
+    <p *ngIf= "tournoi.etat==0"> Le tournoi n'a pas commencé </p>
+    <p *ngIf= "tournoi.etat==1"> Le tournoi a commencé</p>
+    <p *ngIf= "tournoi.etat==2"> Le tournoi est terminé</p>
 
   </div>
   <div class="poules">
     <form (ngSubmit)="onSubmit()">
-
-      <p> Combien de poules voulez-vous ? <input type="number" name="nombrePoule" [(ngModel)]="nombrePoule"></p>
+      <p> Il y a {{tournoi.equipes?.length}} equipes inscritent au tournoi.</p>
+      <p> Combien voulez-vous de poules ? <input type="number" name="nombrePoule" [(ngModel)]="nombrePoule"></p>
       <input type="submit" value="Envoyez">
      </form>
   </div>

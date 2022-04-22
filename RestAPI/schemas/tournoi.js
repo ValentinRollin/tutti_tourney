@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const equipe = require("./equipe");
-const poule = require('./poule');
+const tour = require('./tour');
 
 const tournoiSchema = new mongoose.Schema({
   nomTournoi: {
@@ -18,8 +18,8 @@ const tournoiSchema = new mongoose.Schema({
   equipes: {
     type: [equipe.equipeSchema],
   },
-  poules : {
-      type : [poule.pouleSchema]
+  tours : {
+      type : [tour.tourSchema]
   },
   etat : {
     type : Number,

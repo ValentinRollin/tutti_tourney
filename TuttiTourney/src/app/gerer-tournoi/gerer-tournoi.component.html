@@ -1,0 +1,19 @@
+
+<div class="container">
+  <ng-container *ngFor="let poule of tournoi.tours[lastTour-1].poules">
+    <div class="poule">
+      <p> Poule numéro : {{poule.numeroPoule}}</p>
+      <p> Matchs : </p>
+      <ng-container *ngFor="let match of poule.matchs">
+        <p> {{match.nomEquipe1 }} contre {{match.nomEquipe2}} : {{match.scoreEquipe1}} - {{ match.scoreEquipe2 }}
+          <button (click)="incrScore1(match)"> +1 pour équipe 1 </button>
+          <button (click)="incrScore2(match)"> +1 pour équipe 2</button>
+          <button (click)="addVainqueur(match)"> Match terminé </button>
+        </p>
+        <p *ngIf= "match.vainqueur != undefined"> Le vainqueur est : {{match.vainqueur}} </p>
+      </ng-container>
+    </div>
+
+  </ng-container>
+
+</div>
