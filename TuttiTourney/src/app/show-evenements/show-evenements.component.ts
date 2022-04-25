@@ -9,7 +9,7 @@ import { EvenementService } from '../services/evenement.service';
 })
 export class ShowEvenementsComponent implements OnInit {
 
-  evenements !: any[];
+  evenements !:  any[];
 
   constructor(private evenementService: EvenementService, public route : Router) { }
 
@@ -17,8 +17,9 @@ export class ShowEvenementsComponent implements OnInit {
   {
     this.evenementService.getEvenements().subscribe
     (
-      (data) => this.evenements = data
+      (data) => {localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!) }
     );
+
   }
 
   redirection(nomEvenement : string): void

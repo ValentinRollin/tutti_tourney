@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Evenement } from '../interfaces/evenement';
 import { Tournoi } from '../interfaces/tournoi';
 import { TournoiService } from '../services/tournois.service';
 
@@ -10,17 +11,19 @@ import { TournoiService } from '../services/tournois.service';
 })
 export class ShowTournoiComponent implements OnInit {
 
-  constructor(private tournoiService: TournoiService, public route: Router,  public activeRoute: ActivatedRoute) { }
+  constructor(public route: Router,  public activeRoute: ActivatedRoute) { }
 
-  tournois !: Tournoi[];
+  evenements !: Evenement[];
+  evenement !: any;
+
+  tournois !: any;
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
 
   ngOnInit(): void
   {
-    this.tournoiService.getTournois( this.nomEvenement ).subscribe
-    (
-      (data) => this.tournois = data
-    );
+    this.evenements = JSON.parse(localStorage.getItem('evenements')!)
+    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement);
+    this.tournois = this.evenement.tournois;
 
   }
 
