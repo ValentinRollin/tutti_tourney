@@ -8,6 +8,8 @@ import { EquipeService } from '../services/equipe.service';
 import { MatchService } from '../services/match.service';
 import { PouleService } from '../services/poule.service';
 import { TournoiService } from '../services/tournois.service';
+import { TokenStorageService } from '../services/token-storage.service';
+
 
 @Component({
   selector: 'app-show-poule',
@@ -26,12 +28,28 @@ export class ShowPouleComponent implements OnInit {
 
   nombrePoule !: number;
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
+
   constructor(private pouleService: PouleService, private equipeService: EquipeService, private tournoiService: TournoiService,
     private matchService: MatchService,
-    public route: Router, public activeRoute : ActivatedRoute) { }
+    public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
 
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+    
      this.tournoiService.getTournoi( this.nomEvenement, this.nomTournoi ).subscribe
     (
       (data) => this.tournoi = data

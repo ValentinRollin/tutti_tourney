@@ -10,6 +10,12 @@ const User = mongoose.model(
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Role"
             }
+        ],
+        evenements: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "evenementSchema"
+            }
         ]
     })
 );

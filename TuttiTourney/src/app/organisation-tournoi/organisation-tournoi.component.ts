@@ -6,6 +6,7 @@ import { Tournoi } from '../interfaces/tournoi';
 import { PouleService } from '../services/poule.service';
 import { TourService } from '../services/tour.service';
 import { TournoiService } from '../services/tournois.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-organisation-tournoi',
@@ -24,10 +25,26 @@ export class OrganisationTournoiComponent implements OnInit {
   poules : Poule[] = [];
   nombrePoule !: Number;
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
+
   constructor(private tournoiService: TournoiService, private tourService: TourService, private pouleService: PouleService,
-    public route: Router, public activeRoute : ActivatedRoute) { }
+    public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
 
     this.tournoiService.getTournoi( this.nomEvenement, this.nomTournoi ).subscribe
     (

@@ -6,9 +6,9 @@
       <p> Matchs : </p>
       <ng-container *ngFor="let match of poule.matchs">
         <p> {{match.nomEquipe1 }} contre {{match.nomEquipe2}} : {{match.scoreEquipe1}} - {{ match.scoreEquipe2 }}
-          <button (click)="incrScore1(match)"> +1 pour équipe 1 </button>
-          <button (click)="incrScore2(match)"> +1 pour équipe 2</button>
-          <button (click)="addVainqueur(match)"> Match terminé </button>
+          <button *ngIf="isLoggedIn" (click)="incrScore1(match)"> +1 pour équipe 1 </button>
+          <button *ngIf="isLoggedIn" (click)="incrScore2(match)"> +1 pour équipe 2</button>
+          <button *ngIf="isLoggedIn" (click)="addVainqueur(match)"> Match terminé </button>
         </p>
         <p *ngIf= "match.vainqueur != undefined"> Le vainqueur est : {{match.vainqueur}} </p>
       </ng-container>

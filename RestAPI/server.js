@@ -94,6 +94,18 @@ function initial() {
         }
     });
 }
+var User = mongoose.model('User', User, 'user');
+var obj=new User({
+    username:"admin",
+    email:"admin@admin.admin",
+    password:"admin",
+    roles:initial()
+});
+obj.save(function (err, book) {
+    if (err) return console.error(err);
+    console.log(obj.username + " saved to user collection.");
+  });
+
 
 db.mongoose
     .connect("mongodb://localhost:27017/testDB", {

@@ -3,6 +3,8 @@ import { ConnexionService } from '../services/connexion.service';
 import { TokenStorageService } from '../services/token-storage.service';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-connexion-user',
   templateUrl: './connexion-user.component.html',
@@ -18,7 +20,7 @@ export class ConnexionUserComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  constructor(private authService: ConnexionService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: ConnexionService, private tokenStorage: TokenStorageService,public route: Router) { }
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
@@ -35,7 +37,9 @@ export class ConnexionUserComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        //this.reloadPage();
+        //redirection vers home
+        this.redirection();
       },
       err => {
         this.errorMessage = err.error.message;
@@ -47,6 +51,10 @@ export class ConnexionUserComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload();
+  }
+  //route
+  redirection():void{
+    this.route.navigate(['/home']);
   }
 
 }
