@@ -25,98 +25,98 @@ exports.getAllEvenement = function (req, res) {
 //   });
 // };
 
-//Appel GET pour tout les tournois d'un evenement
-exports.getTournois = function (req, res) {
-  const name = req.params.evenement;
-  Evenement.findOne({ nomEvenement: name }, function (error, evenement) {
-    if (error) {
-      res.send(error);
-    } else {
-      res.send(evenement.tournois);
-    }
-  });
-};
-//Appel GET pour UN tournoi en particulier
-exports.getTournoi = function (req, res) {
-  const evenementName = req.params.evenement;
-  const tournoiName = req.params.tournoi;
-  Evenement.findOne({ nomEvenement: evenementName}, function (error, evenement) {
-    if (error) {
-      res.send(error);
-    } else {
-      let tournoi = evenement.tournois.find(
-        (tournoi) => tournoi.nomTournoi === tournoiName
-      );
-      res.send(tournoi);
-    }
-  });
-};
+// //Appel GET pour tout les tournois d'un evenement
+// exports.getTournois = function (req, res) {
+//   const name = req.params.evenement;
+//   Evenement.findOne({ nomEvenement: name }, function (error, evenement) {
+//     if (error) {
+//       res.send(error);
+//     } else {
+//       res.send(evenement.tournois);
+//     }
+//   });
+// };
+// //Appel GET pour UN tournoi en particulier
+// exports.getTournoi = function (req, res) {
+//   const evenementName = req.params.evenement;
+//   const tournoiName = req.params.tournoi;
+//   Evenement.findOne({ nomEvenement: evenementName}, function (error, evenement) {
+//     if (error) {
+//       res.send(error);
+//     } else {
+//       let tournoi = evenement.tournois.find(
+//         (tournoi) => tournoi.nomTournoi === tournoiName
+//       );
+//       res.send(tournoi);
+//     }
+//   });
+// };
 
 
-//Appel GET pour toutes les equipes d'un tournoi
-exports.getEquipes = function (req, res) {
-  const evenementName = req.params.evenement;
-  const tournoiName = req.params.tournoi;
-  Evenement.findOne(
-    { nomEvenement: evenementName },
-    function (error, evenement) {
-      if (error) {
-        res.send(error);
-      } else {
-        let tournoi = evenement.tournois.find(
-          (tournoi) => tournoi.nomTournoi === tournoiName
-        );
-        let equipes = (tournoi.equipes).sort((a,b) => (a.niveau > b.niveau) ? 1 : ((b.niveau > a.niveau) ? -1 : 0));
-        res.send(equipes);
-      }
-    }
-  );
-}
+// //Appel GET pour toutes les equipes d'un tournoi
+// exports.getEquipes = function (req, res) {
+//   const evenementName = req.params.evenement;
+//   const tournoiName = req.params.tournoi;
+//   Evenement.findOne(
+//     { nomEvenement: evenementName },
+//     function (error, evenement) {
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         let tournoi = evenement.tournois.find(
+//           (tournoi) => tournoi.nomTournoi === tournoiName
+//         );
+//         let equipes = (tournoi.equipes).sort((a,b) => (a.niveau > b.niveau) ? 1 : ((b.niveau > a.niveau) ? -1 : 0));
+//         res.send(equipes);
+//       }
+//     }
+//   );
+// }
 
-//Appel GET pour toutes les poules d'un tournoi
-exports.getPoules = function (req, res) {
-  const evenementName = req.params.evenement;
-  const tournoiName = req.params.tournoi;
-  const tourNum = req.params.tour;
+// //Appel GET pour toutes les poules d'un tournoi
+// exports.getPoules = function (req, res) {
+//   const evenementName = req.params.evenement;
+//   const tournoiName = req.params.tournoi;
+//   const tourNum = req.params.tour;
 
-  Evenement.findOne(
-    { nomEvenement: evenementName },
-    function (error, evenement) {
-      if (error) {
-        res.send(error);
-      } else {
-        let tournoi = evenement.tournois.find(
-          (tournoi) => tournoi.nomTournoi === tournoiName
-        );
-        let poules = (tournoi.tours[tourNum - 1].poules).sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
-        res.send(poules);
-      }
-    }
-  );
-}
+//   Evenement.findOne(
+//     { nomEvenement: evenementName },
+//     function (error, evenement) {
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         let tournoi = evenement.tournois.find(
+//           (tournoi) => tournoi.nomTournoi === tournoiName
+//         );
+//         let poules = (tournoi.tours[tourNum - 1].poules).sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
+//         res.send(poules);
+//       }
+//     }
+//   );
+// }
 
-//Appel GET pour toutes les poules d'un tournoi
-exports.getMatchs = function (req, res) {
-  const evenementName = req.params.evenement;
-  const tournoiName = req.params.tournoi;
-  const tourNum = req.params.tour;
-  const pouleNum = req.params.poule;
+// //Appel GET pour toutes les poules d'un tournoi
+// exports.getMatchs = function (req, res) {
+//   const evenementName = req.params.evenement;
+//   const tournoiName = req.params.tournoi;
+//   const tourNum = req.params.tour;
+//   const pouleNum = req.params.poule;
 
-  Evenement.findOne(
-    { nomEvenement: evenementName },
-    function (error, evenement) {
-      if (error) {
-        res.send(error);
-      } else {
-        let tournoi = evenement.tournois.find(
-          (tournoi) => tournoi.nomTournoi === tournoiName
-        );
-        let poules = (tournoi.tours[tourNum - 1].poules[ pouleNum ].matchs); //.sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
-        res.send(poules);
-      }
-    }
-  );
-}
+//   Evenement.findOne(
+//     { nomEvenement: evenementName },
+//     function (error, evenement) {
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         let tournoi = evenement.tournois.find(
+//           (tournoi) => tournoi.nomTournoi === tournoiName
+//         );
+//         let poules = (tournoi.tours[tourNum - 1].poules[ pouleNum ].matchs); //.sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
+//         res.send(poules);
+//       }
+//     }
+//   );
+// }
 
 
 //Appel pour POST un evenement (sans les tournois)
@@ -288,6 +288,47 @@ exports.pushMatch= function(req, res) {
       },
       {
         "elementZ.numeroPoule" : pouleNum
+      }
+  ],
+    runValidators: true  },
+    function (error) {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send("Update des matchs réussi");
+      }
+    }
+  );
+}
+
+exports.updateMatch= function(req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  const tourNb = req.params.tour;
+  const pouleNum = req.params.poule;
+  const match_id = req.body._id;
+
+  const newScore1 = req.body.scoreEquipe1;
+  const newScore2 = req.body.scoreEquipe2;
+
+
+  Evenement.updateOne(
+    { nomEvenement: evenementName},
+    { "tournois.$[elementX].tours.$[elementY].poules.$[elementZ].matchs.$[elementW].scoreEquipe1": newScore1, 
+      "tournois.$[elementX].tours.$[elementY].poules.$[elementZ].matchs.$[elementW].scoreEquipe2": newScore2
+   } ,
+    { arrayFilters: [
+      {
+      "elementY.numeroTour" : tourNb
+      },
+      {
+        "elementX.nomTournoi" : tournoiName
+      },
+      {
+        "elementZ.numeroPoule" : pouleNum
+      },
+      {
+        "elementW._id" : match_id
       }
   ],
     runValidators: true  },

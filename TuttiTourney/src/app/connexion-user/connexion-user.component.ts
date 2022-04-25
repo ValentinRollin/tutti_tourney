@@ -46,7 +46,7 @@ export class ConnexionUserComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
-  
+
   }
 
   reloadPage(): void {

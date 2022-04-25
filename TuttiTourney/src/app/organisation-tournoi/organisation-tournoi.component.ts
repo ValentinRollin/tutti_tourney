@@ -98,8 +98,7 @@ export class OrganisationTournoiComponent implements OnInit {
         console.log(error),
         this.redirectionPoule(this.nomEvenement, this.nomTournoi) },
       ()=> {
-          console.log("Succesfully updated poules to database"),
-          this.redirectionPoule(this.nomEvenement, this.nomTournoi) }
+          console.log("Succesfully updated poules to database")}
     );
   }
 

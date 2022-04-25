@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { last } from 'rxjs';
+import { findIndex, last } from 'rxjs';
 import { Evenement } from '../interfaces/evenement';
 import { Match } from '../interfaces/match';
 import { Poule } from '../interfaces/poule';
 import { Tournoi } from '../interfaces/tournoi';
 import { EvenementService } from '../services/evenement.service';
+import { MatchService } from '../services/match.service';
 import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-gerer-tournoi',
@@ -21,18 +22,20 @@ export class GererTournoiComponent implements OnInit {
   evenement !: Evenement;
   tournoi !: Tournoi;
   lastTour : number = 0;
-
   poules : Poule[] = [];
   equipes : any[] = [];
-  matchs : Match[] = [];
+  matchs :any = [];
   vainqueur : any;
+
+  indexTournoi: number | undefined;
+
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService,private tokenStorageService: TokenStorageService) { }
+  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService, private matchService: MatchService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -59,18 +62,35 @@ export class GererTournoiComponent implements OnInit {
     this.lastTour = this.tournoi.tours.length;
     this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
     this.equipes = this.tournoi.equipes || [];
+    for (let poule of this.poules){
+      this.matchs.push(poule.matchs);
+    }
+    console.log(this.matchs);
+
   }
 
-  incrScore1(match: Match) : void {
+  incrScore1(match: Match, nomEvenement: any, nomTournoi:any, numeroPoule:any, numeroTour:any) : void {
     if (match.scoreEquipe1 != undefined){
       match.scoreEquipe1 += 1
     }
+
+    this.matchService.updateMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
+      (data) => console.log(data),
+      (error: any) => console.log(error),
+      ()=> console.log("Succesfully added Tournois to database")
+    );
+
   }
 
-  incrScore2(match: Match) : void {
+  incrScore2(match: Match, nomEvenement: any, nomTournoi:any, numeroPoule:any, numeroTour:any) : void {
     if (match.scoreEquipe2 != undefined){
       match.scoreEquipe2 += 1
     }
+    this.matchService.updateMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
+      (data) => console.log(data),
+      (error: any) => console.log(error),
+      ()=> console.log("Succesfully added Tournois to database")
+    );
   }
 
   addVainqueur(match:Match): void{

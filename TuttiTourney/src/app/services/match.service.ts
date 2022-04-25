@@ -23,6 +23,16 @@ export class MatchService {
       });
   }
 
+  updateMatchs(matchs: Match, nomEvenement: any, nomTournoi: any, numeroTour:any, numeroPoule: any ): Observable<Match>{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(matchs);
+    console.log(body);
+    return this.http.put<Match>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/'+numeroTour + '/' + numeroPoule + '/matchs' + '/update', body,
+    {
+      headers: headers,
+      });
+  }
+
   getMatchs(nomEvenement:any, nomTournoi:any, numeroTour: any, numeroPoule: any ): Observable<Match[]>{
     return this.http.get<Match[]>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/' + numeroTour + '/' + numeroPoule +  '/matchs');
   }
