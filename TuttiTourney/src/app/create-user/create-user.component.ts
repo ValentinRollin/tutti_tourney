@@ -66,6 +66,8 @@ export class CreateUserComponent implements OnInit
   }
   //route
   redirection():void{
-    this.route.navigate(['/home']);
+    this.route.navigate(['/home']).then(() => {
+      window.location.reload();
+    });
   }
 }

@@ -10,11 +10,11 @@ import { EvenementService } from '../services/evenement.service';
 export class ShowEvenementsComponent implements OnInit {
 
   evenements !: any[];
-
+  
   constructor(private evenementService: EvenementService, public route : Router) { }
 
   ngOnInit(): void
-  {
+  { 
     this.evenementService.getEvenements().subscribe
     (
       (data) => this.evenements = data
