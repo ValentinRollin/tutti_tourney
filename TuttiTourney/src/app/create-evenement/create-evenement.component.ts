@@ -21,6 +21,7 @@ export class CreateEvenementComponent {
 
     // //ajout a la liste d'evenement
     this.evenements.push(this.newEvenement);
+    localStorage.setItem('evenements', JSON.stringify(this.evenements))
 
     // //post to restAPI
     this.evenementService.createEvenement(this.newEvenement).subscribe(
@@ -34,9 +35,9 @@ export class CreateEvenementComponent {
   }
 
   ngOnInit(): void {
-    // this.evenementService.getEvenements().subscribe(
-    //   (data) => console.table(data)
-    // );
+
+    this.evenements = JSON.parse(localStorage.getItem('evenements')!)
+
   }
 
 //route

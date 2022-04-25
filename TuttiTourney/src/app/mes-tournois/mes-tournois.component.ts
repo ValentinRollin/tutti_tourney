@@ -12,13 +12,13 @@ export class MesTournoisComponent implements OnInit {
 
   nomEvenement: any;
   evenements :any = []
-  constructor(private tournoiService: TournoiService, public route: Router, private evenementService: EvenementService) { }
+  constructor(public route: Router, private evenementService: EvenementService) { }
 
   ngOnInit(): void {
 
       this.evenementService.getEvenements().subscribe
       (
-        (data) => this.evenements = data
+        (data) => {localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!) }
       );
 
   }

@@ -23,4 +23,8 @@ export class MatchService {
       });
   }
 
+  getMatchs(nomEvenement:any, nomTournoi:any, numeroTour: any, numeroPoule: any ): Observable<Match[]>{
+    return this.http.get<Match[]>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/' + numeroTour + '/' + numeroPoule +  '/matchs');
+  }
+
 }

@@ -18,7 +18,7 @@ export class CreateTournoiComponent implements OnInit {
   evenements !: any[];
   evenement : Evenement = {};
 
-  constructor(private tournoiservice: TournoiService, public route: Router, private evenementService: EvenementService) {}
+  constructor(private tournoiservice: TournoiService, public route: Router) {}
 
   onSubmit(): void {
 
@@ -33,9 +33,9 @@ export class CreateTournoiComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.evenementService.getEvenements().subscribe(
-      (data) => this.evenements = data
-    );
+
+    this.evenements = JSON.parse(localStorage.getItem('evenements')!)
+
   }
 
 }

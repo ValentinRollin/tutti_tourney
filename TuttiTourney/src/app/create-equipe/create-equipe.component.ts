@@ -23,9 +23,6 @@ export class CreateEquipeComponent implements OnInit
   onSubmit(): void
   {
 
-    //console.log(this.evenement.nomEvenement);
-    //console.log(this.tournoi.nomTournoi);
-
     // //post to restAPI
     this.equipeService.addEquipe(this.newEquipe, this.nomEvenement, this.nomTournoi).subscribe
     (

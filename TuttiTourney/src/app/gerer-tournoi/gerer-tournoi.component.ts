@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { last } from 'rxjs';
+import { Evenement } from '../interfaces/evenement';
 import { Match } from '../interfaces/match';
+import { Poule } from '../interfaces/poule';
 import { Tournoi } from '../interfaces/tournoi';
-import { TournoiService } from '../services/tournois.service';
+import { EvenementService } from '../services/evenement.service';
 import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-gerer-tournoi',
@@ -14,8 +16,15 @@ export class GererTournoiComponent implements OnInit {
 
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
   nomTournoi : any = this.activeRoute.snapshot.paramMap.get('nomTournoi');
-  tournoi :Tournoi = {tours : []};
-  lastTour: any = 1;
+
+  evenements : Evenement[] = JSON.parse(localStorage.getItem('evenements')!);
+  evenement !: Evenement;
+  tournoi !: Tournoi;
+  lastTour : number = 0;
+
+  poules : Poule[] = [];
+  equipes : any[] = [];
+  matchs : Match[] = [];
   vainqueur : any;
   private roles: string[] = [];
   isLoggedIn = false;
@@ -23,7 +32,7 @@ export class GererTournoiComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private route : Router, public activeRoute : ActivatedRoute, private tournoiService: TournoiService,private tokenStorageService: TokenStorageService) { }
+  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -35,10 +44,21 @@ export class GererTournoiComponent implements OnInit {
       this.username = user.username;
     }
 
-    this.tournoiService.getTournoi( this.nomEvenement, this.nomTournoi ).subscribe
+    this.evenementService.getEvenements().subscribe
     (
-      (data) => {this.tournoi = data, this.lastTour = this.tournoi.tours.length}
+      (data) => {
+        localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!),
+        this.initAll() }
     );
+
+  }
+
+  initAll(): void{
+    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement) || {};
+    this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
+    this.lastTour = this.tournoi.tours.length;
+    this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
+    this.equipes = this.tournoi.equipes || [];
   }
 
   incrScore1(match: Match) : void {

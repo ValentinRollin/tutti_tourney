@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Evenement } from '../interfaces/evenement';
 import { Poule } from '../interfaces/poule';
 import { Tour } from '../interfaces/tour';
 import { Tournoi } from '../interfaces/tournoi';
@@ -15,15 +16,20 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class OrganisationTournoiComponent implements OnInit {
 
-  tournoi : Tournoi = { tours : []};
-  equipes : any[] = [];
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
   nomTournoi : any = this.activeRoute.snapshot.paramMap.get('nomTournoi');
 
+  evenements : Evenement[] = JSON.parse(localStorage.getItem('evenements')!);
+  evenement !: Evenement;
+  tournoi !: Tournoi;
+  lastTour : number = 0;
+
+  poules : Poule[] = [];
+  equipes : any[] = [];
+
+  nombrePoule !: number;
   newTour: Tour = {};
   newPoule : Poule = {};
-  poules : Poule[] = [];
-  nombrePoule !: Number;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -31,11 +37,17 @@ export class OrganisationTournoiComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
-
-  constructor(private tournoiService: TournoiService, private tourService: TourService, private pouleService: PouleService,
+  constructor(private tourService: TourService, private pouleService: PouleService,
     public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    this.evenements = JSON.parse(localStorage.getItem('evenements')!)
+    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement) || {};
+    this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
+    this.lastTour = this.tournoi.tours.length;
+    //this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
+    this.equipes = this.tournoi.equipes || [];
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -45,19 +57,12 @@ export class OrganisationTournoiComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
-
-    this.tournoiService.getTournoi( this.nomEvenement, this.nomTournoi ).subscribe
-    (
-      (data) => this.tournoi = data
-    );
-
   }
 
   onSubmit() : void{
 
     this.tourInit();
     this.ajoutNbPoule(this.nombrePoule);
-    this.redirectionPoule(this.nomEvenement, this.nomTournoi);
 
   }
 
@@ -67,7 +72,8 @@ export class OrganisationTournoiComponent implements OnInit {
   tourInit(): void{
 
     this.newTour = {
-      numeroTour : 1
+      numeroTour : 1,
+      poules : []
     }
 
     this.tourService.addTour(this.newTour,this.nomEvenement, this.nomTournoi).subscribe
@@ -83,15 +89,19 @@ export class OrganisationTournoiComponent implements OnInit {
       this.newPoule = {
         numeroPoule : i
       }
-      console.log(this.newPoule);
-      this.pouleService.addPoule(this.newPoule, this.nomEvenement, this.nomTournoi, this.newTour.numeroTour).subscribe
-      (
-        (data) => console.log(data),
-        (error: any) => console.log(error),
-        ()=> console.log("Succesfully updated poules to database")
-      );
-     };
+      this.poules.push(this.newPoule);
     }
+    this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, this.newTour.numeroTour).subscribe
+    (
+      (data) => console.log(data),
+      (error: any) => {
+        console.log(error),
+        this.redirectionPoule(this.nomEvenement, this.nomTournoi) },
+      ()=> {
+          console.log("Succesfully updated poules to database"),
+          this.redirectionPoule(this.nomEvenement, this.nomTournoi) }
+    );
+  }
 
 
 };

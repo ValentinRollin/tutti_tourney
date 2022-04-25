@@ -1,7 +1,7 @@
 <ng-container *ngIf="poules">
 
 
-  <button  (click)="genererMatch(poules)" *ngIf= "poules[0].equipes!.length!=0 && isLoggedIn"> Les poules me conviennent </button>
+  <button (click)="genererMatch(poules)" *ngIf= "poules[0].equipes && isLoggedIn"> Les poules me conviennent </button>
 
 <div class="container">
 

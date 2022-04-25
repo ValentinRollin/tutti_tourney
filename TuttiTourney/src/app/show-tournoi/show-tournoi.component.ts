@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Evenement } from '../interfaces/evenement';
 import { Tournoi } from '../interfaces/tournoi';
 import { TournoiService } from '../services/tournois.service';
 import { TokenStorageService } from '../services/token-storage.service';
@@ -12,7 +13,10 @@ export class ShowTournoiComponent implements OnInit {
 
   constructor(private tournoiService: TournoiService, public route: Router,  public activeRoute: ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
-  tournois !: Tournoi[];
+  evenements !: Evenement[];
+  evenement !: any;
+
+  tournois !: any;
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
 
   private roles: string[] = [];
@@ -23,6 +27,9 @@ export class ShowTournoiComponent implements OnInit {
 
   ngOnInit(): void
   {
+    this.evenements = JSON.parse(localStorage.getItem('evenements')!)
+    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement);
+    this.tournois = this.evenement.tournois;
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -32,11 +39,6 @@ export class ShowTournoiComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
-    
-    this.tournoiService.getTournois( this.nomEvenement ).subscribe
-    (
-      (data) => this.tournois = data
-    );
 
   }
 

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Equipe } from '../interfaces/equipe';
+import { Evenement } from '../interfaces/evenement';
 import { Match } from '../interfaces/match';
 import { Poule } from '../interfaces/poule';
 import { Tournoi } from '../interfaces/tournoi';
 import { EquipeService } from '../services/equipe.service';
+import { EvenementService } from '../services/evenement.service';
 import { MatchService } from '../services/match.service';
 import { PouleService } from '../services/poule.service';
 import { TournoiService } from '../services/tournois.service';
@@ -21,12 +23,15 @@ export class ShowPouleComponent implements OnInit {
   nomEvenement : any = this.activeRoute.snapshot.paramMap.get('nomEvenement');
   nomTournoi : any = this.activeRoute.snapshot.paramMap.get('nomTournoi');
 
-  tournoi : any = {};
+  evenements : Evenement[] = JSON.parse(localStorage.getItem('evenements')!);
+  evenement !: Evenement;
+  tournoi !: Tournoi;
+  lastTour : number = 0;
+
   poules : Poule[] = [];
   equipes : any[] = [];
   matchs : Match[] = [];
 
-  nombrePoule !: number;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -34,12 +39,17 @@ export class ShowPouleComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
+  nombrePoule !: number;
 
-  constructor(private pouleService: PouleService, private equipeService: EquipeService, private tournoiService: TournoiService,
-    private matchService: MatchService,
+  constructor(private pouleService: PouleService, private tournoiService: TournoiService, private evenementService: EvenementService,
     public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.evenementService.getEvenements().subscribe
+    (
+      (data) => {localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!),
+      this.initAll() }
+    );
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -49,24 +59,15 @@ export class ShowPouleComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
-    
-     this.tournoiService.getTournoi( this.nomEvenement, this.nomTournoi ).subscribe
-    (
-      (data) => this.tournoi = data
-    );
 
-    this.equipeService.getEquipes( this.nomEvenement, this.nomTournoi ).subscribe
-    (
-      (data) => this.equipes = data
-    );
+  }
 
-    this.pouleService.getPoules( this.nomEvenement, this.nomTournoi, 1 ).subscribe
-    (
-      (data) => {this.poules = data, console.log(this.poules)}
-    );
-
-
-
+  initAll(): void{
+    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement) || {};
+    this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
+    this.lastTour = this.tournoi.tours.length;
+    this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
+    this.equipes = this.tournoi.equipes || [];
   }
 
   attributionPoule(equipes : Equipe[],  poules: Poule[]) : void {
@@ -131,14 +132,6 @@ export class ShowPouleComponent implements OnInit {
         }
 
       }
-      //console.log(this.matchs);
-
-    //   this.matchService.addMatchs(this.matchs, this.nomEvenement, this.nomTournoi, 0, poule.numeroPoule).subscribe
-    // (
-    //   (data) => console.log(data),
-    //   (error: any) => console.log(error),
-    //   ()=> console.log(this.matchs)
-    // );
     }
 
     this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, 1).subscribe

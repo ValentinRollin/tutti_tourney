@@ -40,7 +40,7 @@ exports.getTournois = function (req, res) {
 exports.getTournoi = function (req, res) {
   const evenementName = req.params.evenement;
   const tournoiName = req.params.tournoi;
-  Evenement.findOne({ nomEvenement: evenementName, "tournois.nomTournoi": tournoiName}, function (error, evenement) {
+  Evenement.findOne({ nomEvenement: evenementName}, function (error, evenement) {
     if (error) {
       res.send(error);
     } else {
@@ -80,7 +80,7 @@ exports.getPoules = function (req, res) {
   const tourNum = req.params.tour;
 
   Evenement.findOne(
-    { nomEvenement: evenementName, "tournois.nomTournoi": tournoiName },
+    { nomEvenement: evenementName },
     function (error, evenement) {
       if (error) {
         res.send(error);
@@ -89,6 +89,29 @@ exports.getPoules = function (req, res) {
           (tournoi) => tournoi.nomTournoi === tournoiName
         );
         let poules = (tournoi.tours[tourNum - 1].poules).sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
+        res.send(poules);
+      }
+    }
+  );
+}
+
+//Appel GET pour toutes les poules d'un tournoi
+exports.getMatchs = function (req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  const tourNum = req.params.tour;
+  const pouleNum = req.params.poule;
+
+  Evenement.findOne(
+    { nomEvenement: evenementName },
+    function (error, evenement) {
+      if (error) {
+        res.send(error);
+      } else {
+        let tournoi = evenement.tournois.find(
+          (tournoi) => tournoi.nomTournoi === tournoiName
+        );
+        let poules = (tournoi.tours[tourNum - 1].poules[ pouleNum ].matchs); //.sort((a,b) => (a.numeroPoule > b.numeroPoule) ? 1 : ((b.numeroPoule > a.numeroPoule) ? -1 : 0));
         res.send(poules);
       }
     }
