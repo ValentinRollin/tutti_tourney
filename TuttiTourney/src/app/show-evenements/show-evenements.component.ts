@@ -14,7 +14,7 @@ export class ShowEvenementsComponent implements OnInit {
   constructor(private evenementService: EvenementService, public route : Router) { }
 
   ngOnInit(): void
-  {
+  { 
     this.evenementService.getEvenements().subscribe
     (
       (data) => {localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!) }

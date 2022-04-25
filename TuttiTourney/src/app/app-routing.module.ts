@@ -11,6 +11,7 @@ import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
+//import { NavbarComponent } from './navbar/navbar.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -31,6 +32,8 @@ const routes: Routes = [
 
   { path: 'create-user', component: CreateUserComponent },
   { path: 'connexion-user', component: ConnexionUserComponent },
+
+  //{ path : 'navbar', component: NavbarComponent},
 ];
 
 @NgModule({
