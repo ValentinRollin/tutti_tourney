@@ -8,7 +8,7 @@
     <p *ngIf= "tournoi.etat==2"> Le tournoi est terminé</p>
 
   </div>
-  <div class="poules">
+  <div *ngIf="isLoggedIn" class="poules">
     <form (ngSubmit)="onSubmit()">
       <p> Il y a {{tournoi.equipes?.length}} equipes inscritent au tournoi.</p>
       <p> Combien voulez-vous de poules ? <input type="number" name="nombrePoule" [(ngModel)]="nombrePoule"></p>

@@ -6,8 +6,8 @@
       <h3> {{ tournoi.sport }} </h3>
       <p> {{ tournoi.description }} </p>
 
-      <button (click)="redirectionInscriptionEquipe(nomEvenement, tournoi.nomTournoi)"> Inscrire une équipe </button>
-      <button  (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button>
+      <button *ngIf="isLoggedIn" (click)="redirectionInscriptionEquipe(nomEvenement, tournoi.nomTournoi)"> Inscrire une équipe </button>
+      <button *ngIf="isLoggedIn" (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button>
     </div>
   </ng-container>
 </div>

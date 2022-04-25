@@ -6,9 +6,7 @@ import { Match } from '../interfaces/match';
 import { Poule } from '../interfaces/poule';
 import { Tournoi } from '../interfaces/tournoi';
 import { EvenementService } from '../services/evenement.service';
-import { MatchService } from '../services/match.service';
-import { TournoiService } from '../services/tournois.service';
-
+import { TokenStorageService } from '../services/token-storage.service';
 @Component({
   selector: 'app-gerer-tournoi',
   templateUrl: './gerer-tournoi.component.html',
@@ -28,9 +26,23 @@ export class GererTournoiComponent implements OnInit {
   equipes : any[] = [];
   matchs : Match[] = [];
   vainqueur : any;
-  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService) { }
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
+  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
 
     this.evenementService.getEvenements().subscribe
     (

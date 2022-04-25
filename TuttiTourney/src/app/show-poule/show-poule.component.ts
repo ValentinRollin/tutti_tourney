@@ -10,6 +10,8 @@ import { EvenementService } from '../services/evenement.service';
 import { MatchService } from '../services/match.service';
 import { PouleService } from '../services/poule.service';
 import { TournoiService } from '../services/tournois.service';
+import { TokenStorageService } from '../services/token-storage.service';
+
 
 @Component({
   selector: 'app-show-poule',
@@ -30,19 +32,33 @@ export class ShowPouleComponent implements OnInit {
   equipes : any[] = [];
   matchs : Match[] = [];
 
+
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
   nombrePoule !: number;
 
   constructor(private pouleService: PouleService, private tournoiService: TournoiService, private evenementService: EvenementService,
-    public route: Router, public activeRoute : ActivatedRoute) { }
+    public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-
     this.evenementService.getEvenements().subscribe
     (
-      (data) => {
-        localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!),
-        this.initAll() }
+      (data) => {localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!),
+      this.initAll() }
     );
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
 
   }
 
