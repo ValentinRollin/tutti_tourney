@@ -1,8 +1,8 @@
 <h1> Liste des évenements : </h1>
 <div class="container">
   <div class="evenement" *ngFor="let evenement of evenements" (click)="redirection(evenement.nomEvenement)">
-    <h2> {{ evenement.nomEvenement }} </h2>
-    <h3> {{ evenement.date | date: 'd MMMM yyyy' }} </h3>
+    <h2>Evenement: {{ evenement.nomEvenement }} </h2>
+    <h3>date: {{ evenement.date | date: 'd MMMM yyyy' }} </h3>
     <p> {{ evenement.description }} </p>
     <!-- <button (click)="redirection(evenement.nom)"> Voir les tournois</button> -->
   </div>
