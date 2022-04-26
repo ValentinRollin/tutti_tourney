@@ -12,7 +12,7 @@ body {
   background-color: #2B2E4A;
 }
 
-input[type=text], input[type=number], input[type=date], select {
+input[type=text], input[type=number], input[type=date], input[type=password], input[type=email], select {
   border-radius: 25px;
   height: 20px;
   padding: 5px;
@@ -34,4 +34,6 @@ select {
   border-style: none;
 }
 
-
+h1, h2, h3, p {
+  color: white;
+}

@@ -1,17 +1,17 @@
 <nav>
-  <div class="right">
+  <div class="left">
     <a class="home" href="">TUTTI TOURNEY</a>
   </div>
 
-  <div class="left" *ngIf="isLoggedIn; else loggedOut">
+  <div class="right" *ngIf="isLoggedIn; else loggedOut">
     <a href="/mes-tournois"> Mes tournois </a>
     <a href="/create-evenement">Créer un événement</a>
     <a href="/create-tournoi">Créer un tournoi</a>
-    Bonjour, {{ username }} !
+    Bonjour, {{ username }} !   
     <a href="deco"(click)="logout()">Déconnexion</a>
   </div>
   <ng-template #loggedOut>
-    <div class="left">
+    <div class="right">
     <a href="/connexion-user">Connexion</a>
     <a href="/create-user">Inscription</a></div>
   </ng-template>
