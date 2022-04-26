@@ -17,6 +17,7 @@ import { MesTournoisComponent } from './mes-tournois/mes-tournois.component';
 import { GererTournoiComponent } from './gerer-tournoi/gerer-tournoi.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
+import { NextTourComponent } from './next-tour/next-tour.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ConnexionUserComponent } from './connexion-user/connexion-user.componen
     MesTournoisComponent,
     GererTournoiComponent,
     CreateUserComponent,
-    ConnexionUserComponent
+    ConnexionUserComponent,
+    NextTourComponent
   ],
   imports: [
     BrowserModule,

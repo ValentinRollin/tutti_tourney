@@ -8,6 +8,7 @@ import { Tournoi } from '../interfaces/tournoi';
 import { EvenementService } from '../services/evenement.service';
 import { MatchService } from '../services/match.service';
 import { TokenStorageService } from '../services/token-storage.service';
+
 @Component({
   selector: 'app-gerer-tournoi',
   templateUrl: './gerer-tournoi.component.html',
@@ -26,6 +27,8 @@ export class GererTournoiComponent implements OnInit {
   equipes : any[] = [];
   matchs :any = [];
   vainqueur : any;
+  boolClassement : boolean = false;
+  classement : any = [];
 
   indexTournoi: number | undefined;
 
@@ -65,8 +68,16 @@ export class GererTournoiComponent implements OnInit {
     for (let poule of this.poules){
       this.matchs.push(poule.matchs);
     }
-    console.log(this.matchs);
 
+    for (let i=0; i<this.poules.length; i++){
+      for (let match of this.matchs[i]){
+        if (match.etat){
+
+          this.addVainqueur(match, this.nomEvenement, this.nomTournoi, i , this.lastTour);
+
+        }
+      }
+    }
   }
 
   incrScore1(match: Match, nomEvenement: any, nomTournoi:any, numeroPoule:any, numeroTour:any) : void {
@@ -74,7 +85,7 @@ export class GererTournoiComponent implements OnInit {
       match.scoreEquipe1 += 1
     }
 
-    this.matchService.updateMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
+    this.matchService.updateScoresMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
       (data) => console.log(data),
       (error: any) => console.log(error),
       ()=> console.log("Succesfully added Tournois to database")
@@ -86,14 +97,14 @@ export class GererTournoiComponent implements OnInit {
     if (match.scoreEquipe2 != undefined){
       match.scoreEquipe2 += 1
     }
-    this.matchService.updateMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
+    this.matchService.updateScoresMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
       (data) => console.log(data),
       (error: any) => console.log(error),
       ()=> console.log("Succesfully added Tournois to database")
     );
   }
 
-  addVainqueur(match:Match): void{
+  addVainqueur(match: Match, nomEvenement: any, nomTournoi:any, numeroPoule:any, numeroTour:any): void{
     if (match.scoreEquipe1 != undefined && match.scoreEquipe2 != undefined){
       if (match.scoreEquipe1 > match.scoreEquipe2){
         match.vainqueur = match.nomEquipe1;
@@ -102,6 +113,59 @@ export class GererTournoiComponent implements OnInit {
         match.vainqueur = match.nomEquipe2;
       }
     }
+    if(!match.etat){
+      match.etat = true;
+      this.matchService.updateEtatMatchs(match, nomEvenement, nomTournoi, numeroPoule, numeroTour ).subscribe(
+        (data) => console.log(data),
+        (error: any) => console.log(error),
+        ()=> console.log("Succesfully added Tournois to database")
+        );
+      }
+  }
+
+  calculClassement(): void{
+
+    let objet = {};
+
+      for (let poule of this.poules){
+
+        this.classement = [];
+
+        for (let equipe of poule.equipes!){
+          objet = {
+            nomEquipe: equipe.nomEquipe,
+            points: this.calculPoint(equipe.nomEquipe, poule.numeroPoule)
+          }
+
+          this.classement.push(objet);
+        }
+        this.classement.sort((a: { points: number; },b: { points: number; }) => b.points - a.points);
+        console.log(this.classement);
+        poule.classement = this.classement;
+      }
+
+  }
+  showClassement(): void{
+    this.boolClassement = !this.boolClassement;
+
+    if(this.boolClassement){
+
+      this.calculClassement();
+  }
+}
+  calculPoint(nomEquipe : any, numeroPoule:any): number{
+    let compteur = 0;
+    for (let match of this.matchs[numeroPoule]){
+      if (match.vainqueur == nomEquipe){
+        compteur += 1;
+      }
+    }
+
+    return compteur;
+  }
+
+  redirectionNextTour(nomEvenement : any, nomTournoi : any) : void {
+    this.route.navigate([ "mes-tournois/gerer/nextTour/", nomEvenement, nomTournoi, ]);
   }
 
 }

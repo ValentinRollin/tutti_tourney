@@ -7,6 +7,6 @@ export interface Match
   nomEquipe2 ?: string;
   scoreEquipe1 ?: number;
   scoreEquipe2 ?: number;
-  finis ?: boolean;
+  etat ?: boolean;
   vainqueur?:string;
 }

@@ -28,5 +28,9 @@ export class MesTournoisComponent implements OnInit {
     this.route.navigate(["/mes-tournois/gerer", nomEvenement, nomTournoi]);
   }
 
+  redirectionOrganisation(nomEvenement : any, nomTournoi : any) : void {
+    this.route.navigate(["/organisation", nomEvenement, nomTournoi]);
+  }
+
 
 }

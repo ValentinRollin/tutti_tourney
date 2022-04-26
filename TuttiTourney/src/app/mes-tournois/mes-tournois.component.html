@@ -1,18 +1,26 @@
+ <div class="container_event">
+    <ng-container *ngFor="let evenement of evenements">
+      <h1> Tournoi dans l'evenement : {{evenement.nomEvenement}} </h1>
+      <div class="container_tournoi">
+        <ng-container *ngFor="let tournoi of evenement.tournois">
 
-<div class="container_event">
-<ng-container *ngFor="let evenement of evenements">
-<h1> Tournoi dans l'evenement : {{evenement.nomEvenement}} </h1>
-<div class="container_tournoi">
-  <ng-container *ngFor="let tournoi of evenement.tournois">
-    <div class="tournoi" *ngIf="tournoi.etat==1">
-      <h2> {{ tournoi.nomTournoi }} </h2>
-      <h3> {{ tournoi.sport }} </h3>
-      <p> {{ tournoi.description }} </p>
+          <div class="tournoi" *ngIf="tournoi.etat==1">
+            <h2> Tournoi : {{ tournoi.nomTournoi }} </h2>
+            <h3> Sport : {{ tournoi.sport }} </h3>
+            <p> {{ tournoi.description }} </p>
+            <p> Les poules sont créées vous pouvez gérer les matchs</p>
+            <button (click)="redirectionGererTournoi(evenement.nomEvenement, tournoi.nomTournoi)"> Gérer le tournoi </button>
+          </div>
 
-      <button (click)="redirectionGererTournoi(evenement.nomEvenement, tournoi.nomTournoi)"> Gerer ce tournoi </button>
-      <!-- <button  (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button> -->
-    </div>
-  </ng-container>
-</div>
-</ng-container>
-</div>
+          <div class="tournoi" *ngIf="tournoi.etat==0">
+            <h2> Tournoi : {{ tournoi.nomTournoi }} </h2>
+            <h3> Sport : {{ tournoi.sport }} </h3>
+            <p> {{ tournoi.description }} </p>
+            <p> Les poules n'ont pas encore été crées, les inscriptions des équipes sont encore ouverte</p>
+            <button (click)="redirectionOrganisation(evenement.nomEvenement, tournoi.nomTournoi)"> Créer les poules </button>
+          </div>
+
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>

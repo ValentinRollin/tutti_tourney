@@ -1,0 +1,12 @@
+<div class="container">
+
+  <div class="poules">
+    <form (ngSubmit)="onSubmit()">
+      <p> Pour passer au prochain tour : </p>
+      <p> Indiquez le nombre de poules souhaités : <input type="number" name="nombrePoule" [(ngModel)]="nombrePoules">
+      <p > Indiquez le nombre d'équipes à garder par poules : <input type="number" name="nombreEquipes" [(ngModel)]="nombreEquipes">
+      <p> Rappel : Vous avez {{poules.length}} poules de {{ equipes.length / poules.length}} equipes </p>
+        <input type="submit" value="Envoyez">
+     </form>
+  </div>
+</div>

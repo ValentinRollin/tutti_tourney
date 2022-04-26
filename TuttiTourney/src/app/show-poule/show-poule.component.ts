@@ -67,7 +67,7 @@ export class ShowPouleComponent implements OnInit {
     this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
     this.lastTour = this.tournoi.tours.length;
     this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
-    this.equipes = this.tournoi.equipes || [];
+    this.equipes = this.tournoi.tours[ this.lastTour-1 ].equipes || [];
   }
 
   attributionPoule(equipes : Equipe[],  poules: Poule[]) : void {
@@ -100,7 +100,7 @@ export class ShowPouleComponent implements OnInit {
       }
     }
 
-    this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, 1).subscribe
+    this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, this.lastTour).subscribe
     (
       (data) => console.log(data),
       (error: any) => console.log(error),
@@ -134,7 +134,7 @@ export class ShowPouleComponent implements OnInit {
       }
     }
 
-    this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, 1).subscribe
+    this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, this.lastTour).subscribe
     (
       (data) => console.log(data),
       (error: any) => console.log(error),

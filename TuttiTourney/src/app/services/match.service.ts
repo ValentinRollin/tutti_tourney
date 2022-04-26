@@ -23,11 +23,21 @@ export class MatchService {
       });
   }
 
-  updateMatchs(matchs: Match, nomEvenement: any, nomTournoi: any, numeroTour:any, numeroPoule: any ): Observable<Match>{
+  updateScoresMatchs(matchs: Match, nomEvenement: any, nomTournoi: any, numeroTour:any, numeroPoule: any ): Observable<Match>{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(matchs);
     console.log(body);
-    return this.http.put<Match>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/'+numeroTour + '/' + numeroPoule + '/matchs' + '/update', body,
+    return this.http.put<Match>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/'+numeroTour + '/' + numeroPoule + '/matchs' + '/updateScore', body,
+    {
+      headers: headers,
+      });
+  }
+
+  updateEtatMatchs(matchs: Match, nomEvenement: any, nomTournoi: any, numeroTour:any, numeroPoule: any ): Observable<Match>{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(matchs);
+    console.log(body);
+    return this.http.put<Match>(this.apiUrl+'/evenements/'+nomEvenement+'/'+nomTournoi + '/'+numeroTour + '/' + numeroPoule + '/matchs' + '/updateEtat', body,
     {
       headers: headers,
       });

@@ -3,17 +3,36 @@
   <ng-container *ngFor="let poule of poules">
     <div class="poule">
       <p> Poule numéro : {{poule.numeroPoule}}</p>
-      <p> Matchs : </p>
-      <ng-container *ngFor="let match of matchs[poule.numeroPoule || 0]">
-        <p> {{match.nomEquipe1 }} contre {{match.nomEquipe2}} : {{match.scoreEquipe1}} - {{ match.scoreEquipe2 }}
-          <button *ngIf="isLoggedIn" (click)="incrScore1(match, nomEvenement, nomTournoi, lastTour, poule.numeroPoule)"> +1 pour équipe 1 </button>
-          <button *ngIf="isLoggedIn" (click)="incrScore2(match, nomEvenement, nomTournoi, lastTour, poule.numeroPoule)"> +1 pour équipe 2</button>
-          <button *ngIf="isLoggedIn" (click)="addVainqueur(match)"> Match terminé </button>
-        </p>
-        <p *ngIf= "match.vainqueur != undefined"> Le vainqueur est : {{match.vainqueur}} </p>
-      </ng-container>
-    </div>
 
-  </ng-container>
+      <ng-container *ngIf="!boolClassement">
+        <p> Matchs : </p>
+        <ng-container *ngFor="let match of matchs[poule.numeroPoule || 0]">
+          <p> {{match.nomEquipe1 }} contre {{match.nomEquipe2}} : {{match.scoreEquipe1}} - {{ match.scoreEquipe2 }}
+            <ng-container *ngIf="match.etat">
+              | Le match est terminé
+            </ng-container>
+
+          <ng-container *ngIf="!match.etat">
+            <button *ngIf="isLoggedIn" (click)="incrScore1(match, nomEvenement, nomTournoi, lastTour, poule.numeroPoule)"> +1 pour équipe 1 </button>
+            <button *ngIf="isLoggedIn" (click)="incrScore2(match, nomEvenement, nomTournoi, lastTour, poule.numeroPoule)"> +1 pour équipe 2</button>
+            <button *ngIf="isLoggedIn" (click)="addVainqueur(match, nomEvenement, nomTournoi, lastTour, poule.numeroPoule)"> Match terminé </button>
+          </ng-container>
+        </p>
+        <p *ngIf= "match.etat"> Le vainqueur est : {{ match.vainqueur }} </p>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="boolClassement">
+
+      <p> Classement : </p>
+      <p *ngFor="let equipe of poule.classement"> {{ equipe['nomEquipe'] }} : {{ equipe['points'] }} points </p>
+
+    </ng-container>
+
+  </div>
+
+</ng-container>
 
 </div>
+<button (click)="showClassement()"> Afficher les classements </button>
+<button (click)="redirectionNextTour(nomEvenement, nomTournoi)"> Passer au tour suivant </button>

@@ -19,7 +19,7 @@ const matchSchema = new mongoose.Schema({
     required: false,
     default: 0
   },
-  fini: {
+  etat: {
     type: Boolean,
     default: false,
   },

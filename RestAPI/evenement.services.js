@@ -301,7 +301,7 @@ exports.pushMatch= function(req, res) {
   );
 }
 
-exports.updateMatch= function(req, res) {
+exports.updateScoresMatch= function(req, res) {
   const evenementName = req.params.evenement;
   const tournoiName = req.params.tournoi;
   const tourNb = req.params.tour;
@@ -316,6 +316,43 @@ exports.updateMatch= function(req, res) {
     { nomEvenement: evenementName},
     { "tournois.$[elementX].tours.$[elementY].poules.$[elementZ].matchs.$[elementW].scoreEquipe1": newScore1, 
       "tournois.$[elementX].tours.$[elementY].poules.$[elementZ].matchs.$[elementW].scoreEquipe2": newScore2
+   } ,
+    { arrayFilters: [
+      {
+      "elementY.numeroTour" : tourNb
+      },
+      {
+        "elementX.nomTournoi" : tournoiName
+      },
+      {
+        "elementZ.numeroPoule" : pouleNum
+      },
+      {
+        "elementW._id" : match_id
+      }
+  ],
+    runValidators: true  },
+    function (error) {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send("Update des matchs réussi");
+      }
+    }
+  );
+}
+
+exports.updateEtatMatch= function(req, res) {
+  const evenementName = req.params.evenement;
+  const tournoiName = req.params.tournoi;
+  const tourNb = req.params.tour;
+  const pouleNum = req.params.poule;
+  const match_id = req.body._id;
+
+
+  Evenement.updateOne(
+    { nomEvenement: evenementName},
+    { "tournois.$[elementX].tours.$[elementY].poules.$[elementZ].matchs.$[elementW].etat": true
    } ,
     { arrayFilters: [
       {

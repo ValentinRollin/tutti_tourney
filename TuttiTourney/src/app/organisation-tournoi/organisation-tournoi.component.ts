@@ -30,6 +30,7 @@ export class OrganisationTournoiComponent implements OnInit {
   nombrePoule !: number;
   newTour: Tour = {};
   newPoule : Poule = {};
+  nbrEquipes !: number;
 
   private roles: string[] = [];
   isLoggedIn = false;
@@ -48,6 +49,7 @@ export class OrganisationTournoiComponent implements OnInit {
     this.lastTour = this.tournoi.tours.length;
     //this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
     this.equipes = this.tournoi.equipes || [];
+    this.nbrEquipes = this.equipes.length;
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -73,7 +75,8 @@ export class OrganisationTournoiComponent implements OnInit {
 
     this.newTour = {
       numeroTour : 1,
-      poules : []
+      poules : [],
+      equipes : this.equipes
     }
 
     this.tourService.addTour(this.newTour,this.nomEvenement, this.nomTournoi).subscribe

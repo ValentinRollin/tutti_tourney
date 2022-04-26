@@ -13,6 +13,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
 //import { NavbarComponent } from './navbar/navbar.component';
 import { AppComponent } from './app.component';
+import { NextTourComponent } from './next-tour/next-tour.component';
 
 const routes: Routes = [
   { path : '', redirectTo:'/home', pathMatch:'full' },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path : 'mes-tournois', component: MesTournoisComponent},
 
   { path : 'mes-tournois/gerer/:nomEvenement/:nomTournoi', component: GererTournoiComponent},
-
+  { path : 'mes-tournois/gerer/nextTour/:nomEvenement/:nomTournoi', component: NextTourComponent},
   { path : 'create-evenement', component: CreateEvenementComponent},
   { path : 'create-equipe/:nomEvenement/:nomTournoi', component: CreateEquipeComponent},
   { path : 'create-tournoi', component: CreateTournoiComponent},

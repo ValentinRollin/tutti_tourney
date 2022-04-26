@@ -49,7 +49,8 @@ app.put("/evenements/:evenement/:tournoi/:tour/poules/update", evenement.updateP
 //API Matchs
 app.put("/evenements/:evenement/:tournoi/:tour/:poule/matchs", evenement.pushMatch);
 //app.get("/evenements/:evenement/:tournoi/:tour/:poule/matchs",evenement.getMatchs);
-app.put("/evenements/:evenement/:tournoi/:tour/:poule/matchs/update", evenement.updateMatch);
+app.put("/evenements/:evenement/:tournoi/:tour/:poule/matchs/updateScore", evenement.updateScoresMatch);
+app.put("/evenements/:evenement/:tournoi/:tour/:poule/matchs/updateEtat", evenement.updateEtatMatch);
 
 // listen du serveur
 app.listen(3000, function () {
