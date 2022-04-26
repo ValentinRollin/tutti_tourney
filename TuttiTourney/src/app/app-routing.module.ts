@@ -11,6 +11,9 @@ import { ShowPouleComponent } from './show-poule/show-poule.component';
 import { ShowTournoiComponent } from './show-tournoi/show-tournoi.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
+import { TournoisEnCoursComponent } from './tournois-en-cours/tournois-en-cours.component';
+import { TournoisFinisComponent } from './tournois-finis/tournois-finis.component';
+import { VoirTournoiComponent } from './voir-tournoi/voir-tournoi.component';
 //import { NavbarComponent } from './navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { NextTourComponent } from './next-tour/next-tour.component';
@@ -19,7 +22,11 @@ const routes: Routes = [
   { path : '', redirectTo:'/home', pathMatch:'full' },
   { path : 'home', component: ShowEvenementsComponent},
   { path : 'mes-tournois', component: MesTournoisComponent},
+  { path : 'tournois-en-cours', component: TournoisEnCoursComponent},
+  { path : 'tournois-finis', component: TournoisFinisComponent},
 
+  { path : 'tournois-en-cours/:nomEvenement/:nomTournoi', component: VoirTournoiComponent},
+  { path : 'tournois-finis/:nomEvenement/:nomTournoi', component: VoirTournoiComponent},
   { path : 'mes-tournois/gerer/:nomEvenement/:nomTournoi', component: GererTournoiComponent},
   { path : 'mes-tournois/gerer/nextTour/:nomEvenement/:nomTournoi', component: NextTourComponent},
   { path : 'create-evenement', component: CreateEvenementComponent},

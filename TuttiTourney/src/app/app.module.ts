@@ -18,6 +18,9 @@ import { GererTournoiComponent } from './gerer-tournoi/gerer-tournoi.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ConnexionUserComponent } from './connexion-user/connexion-user.component';
 import { NextTourComponent } from './next-tour/next-tour.component';
+import { TournoisFinisComponent } from './tournois-finis/tournois-finis.component';
+import { TournoisEnCoursComponent } from './tournois-en-cours/tournois-en-cours.component';
+import { VoirTournoiComponent } from './voir-tournoi/voir-tournoi.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { NextTourComponent } from './next-tour/next-tour.component';
     GererTournoiComponent,
     CreateUserComponent,
     ConnexionUserComponent,
-    NextTourComponent
+    NextTourComponent,
+    TournoisFinisComponent,
+    TournoisEnCoursComponent,
+    VoirTournoiComponent
   ],
   imports: [
     BrowserModule,

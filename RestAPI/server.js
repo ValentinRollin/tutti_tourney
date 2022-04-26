@@ -96,7 +96,7 @@ function initial() {
         }
     });
 }
-var User = mongoose.model('User', User, 'user');
+/*var User = mongoose.model('User', User, 'users');
 var obj=new User({
     username:"admin",
     email:"admin@admin.admin",
@@ -106,7 +106,7 @@ var obj=new User({
 obj.save(function (err, book) {
     if (err) return console.error(err);
     console.log(obj.username + " saved to user collection.");
-  });
+ });*/
 
 
 db.mongoose

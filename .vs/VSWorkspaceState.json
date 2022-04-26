@@ -1,13 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\RestAPI",
     "\\TuttiTourney",
     "\\TuttiTourney\\src",
     "\\TuttiTourney\\src\\app",
+    "\\TuttiTourney\\src\\app\\connexion-user",
+    "\\TuttiTourney\\src\\app\\create-user",
     "\\TuttiTourney\\src\\app\\interfaces",
-    "\\TuttiTourney\\src\\app\\show-event",
-    "\\TuttiTourney\\src\\app\\show-tournoi"
+    "\\TuttiTourney\\src\\app\\navbar",
+    "\\TuttiTourney\\src\\app\\services"
   ],
-  "SelectedNode": "\\TuttiTourney\\src\\app\\show-tournoi\\show-tournoi.component.ts",
+  "SelectedNode": "\\TuttiTourney\\src\\app\\create-user\\create-user.component.html",
   "PreviewInSolutionExplorer": false
 }

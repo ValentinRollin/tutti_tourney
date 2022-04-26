@@ -25,7 +25,11 @@ const tournoiSchema = new mongoose.Schema({
     type : Number,
     enum : [ 0, 1, 2],
     default : 0 
-  }
+  },
+  organisateur: {
+    type: String,
+    required: true,
+  },
 });
 
 exports.tournoiSchema = tournoiSchema;
