@@ -1,0 +1,17 @@
+
+<div class="container">
+    <ng-container *ngFor="let poule of poules">
+      <div class="poule">
+        <p> Poule numéro : {{poule.numeroPoule}}</p>
+        <p> Matchs : </p>
+        <ng-container *ngFor="let match of matchs[poule.numeroPoule || 0]">
+          <p> {{match.nomEquipe1 }} contre {{match.nomEquipe2}} : {{match.scoreEquipe1}} - {{ match.scoreEquipe2 }}
+          </p>
+          <p *ngIf= "match.vainqueur != undefined"> Le vainqueur est : {{match.vainqueur}} </p>
+        </ng-container>
+      </div>
+  
+    </ng-container>
+  
+  </div>
+

@@ -1,12 +1,12 @@
 
 <div class="container_event">
 <ng-container *ngFor="let evenement of evenements">
-<h1> Tournoi dans l'evenement : {{evenement.nomEvenement}} </h1>
 <div class="container_tournoi">
   <ng-container *ngFor="let tournoi of evenement.tournois">
-    <div class="tournoi" *ngIf="tournoi.etat==1">
-      <h2> {{ tournoi.nomTournoi }} </h2>
-      <h3> {{ tournoi.sport }} </h3>
+    <div class="tournoi" *ngIf="tournoi.etat==1 && tournoi.organisateur==id ">
+      <p> Tournoi de l'evenement :<b> {{evenement.nomEvenement}} </b></p>
+      <p> Nom du tournoi:<b> {{ tournoi.nomTournoi }} </b></p>
+      <p> Sport:<b> {{ tournoi.sport }}</b> </p>
       <p> {{ tournoi.description }} </p>
 
       <button (click)="redirectionGererTournoi(evenement.nomEvenement, tournoi.nomTournoi)"> Gerer ce tournoi </button>

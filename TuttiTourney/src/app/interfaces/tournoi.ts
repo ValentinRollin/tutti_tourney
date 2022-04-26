@@ -8,4 +8,5 @@ export interface Tournoi {
   equipes ?: Equipe[];
   tours : Tour[];
   etat ?: number;
+  organisateur?:string;
 }
