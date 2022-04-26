@@ -37,6 +37,8 @@ export class OrganisationTournoiComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
+  conseiller: number[]=[];
+
   constructor(private tourService: TourService, private pouleService: PouleService,
     public route: Router, public activeRoute : ActivatedRoute,private tokenStorageService: TokenStorageService) { }
 
@@ -57,6 +59,8 @@ export class OrganisationTournoiComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
     }
+    if(this.tournoi.equipes!.length>=2){
+      this.nbPoulesConseillees(this.tournoi.equipes!.length);}
   }
 
   onSubmit() : void{
@@ -101,7 +105,22 @@ export class OrganisationTournoiComponent implements OnInit {
           console.log("Succesfully updated poules to database")}
     );
   }
-
-
+  nbPoulesConseillees(nbEquipes: number): void{
+    let i=0
+    let p=1
+    let pow2proche;
+    while(p<nbEquipes){
+        p=p*2;
+        i=i+1;}
+    if (p-nbEquipes<nbEquipes-p/2){pow2proche= p;}
+        
+    else {pow2proche= p/2;i=i-1;}
+    let x=2
+    for (let j:number = 0; j<6; j=j+2 ){
+      this.conseiller[j]=pow2proche/x;
+      this.conseiller[j+1]=Math.ceil(nbEquipes/this.conseiller[j]);
+      x=x*2
+    }
+  }
 };
 

@@ -12,6 +12,10 @@
     <form (ngSubmit)="onSubmit()">
       <p> Il y a {{tournoi.equipes?.length}} equipes inscritent au tournoi.</p>
       <p> Combien voulez-vous de poules ? <input type="number" name="nombrePoule" [(ngModel)]="nombrePoule"></p>
+      <p *ngIf="conseiller[0]">Nombre de poules conseillées:</p>
+      <p *ngIf="conseiller[0]>=1"> {{conseiller[0]}} poule(s) de maximum {{conseiller[1]}} équipes.</p>
+      <p *ngIf="conseiller[2]>=1"> {{conseiller[2]}} poule(s) de maximum {{conseiller[3]}} équipes.</p>
+      <p *ngIf="conseiller[4]>=1"> {{conseiller[4]}} poule(s) de maximum {{conseiller[5]}} équipes.</p>
       <input type="submit" value="Envoyez">
      </form>
   </div>
