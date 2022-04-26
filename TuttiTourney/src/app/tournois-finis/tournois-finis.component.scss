@@ -1,0 +1,29 @@
+.container_tournoi {
+    margin: 0 auto;
+    margin-top: 3em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 10px;
+  }
+  .container_evenement {
+    border: black solid;
+  }
+  
+  .tournoi {
+    width: 300px;
+    height: 300px;
+    background-color: #e09f7d;
+    padding-left: 1em;
+    border-radius: 25px;
+    margin: 20px;
+    // margin-top: 3em;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  h1{
+    color: white;
+  }
+  

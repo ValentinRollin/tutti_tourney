@@ -5,6 +5,7 @@ import { Evenement } from '../interfaces/evenement';
 import { Tournoi } from '../interfaces/tournoi';
 import { EvenementService } from '../services/evenement.service';
 import { TournoiService } from '../services/tournois.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-create-tournoi',
@@ -17,12 +18,15 @@ export class CreateTournoiComponent implements OnInit {
   newTournoi : Tournoi = {tours : []};
   evenements !: any[];
   evenement : Evenement = {};
-
-  constructor(private tournoiservice: TournoiService, public route: Router) {}
-
+  isLoggedIn = false;
+  constructor(private tournoiservice: TournoiService, public route: Router, private tokenStorageService: TokenStorageService) {}
   onSubmit(): void {
 
     //post to restAPI
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.newTournoi.organisateur=user.id;}
     this.tournoiservice.addTournoi(this.newTournoi, this.evenement.nomEvenement ).subscribe(
       (data) => console.log(data),
       (error: any) => console.log(error),
@@ -39,3 +43,4 @@ export class CreateTournoiComponent implements OnInit {
   }
 
 }
+

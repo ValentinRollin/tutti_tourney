@@ -1,0 +1,20 @@
+
+
+<div class="container_event">
+    <ng-container *ngFor="let evenement of evenements">
+    <h1> Tournoi dans l'evenement : {{evenement.nomEvenement}} </h1>
+    <div class="container_tournoi">
+      <ng-container *ngFor="let tournoi of evenement.tournois">
+        <div class="tournoi" *ngIf="tournoi.etat==2 ">
+          <h2> {{ tournoi.nomTournoi }} </h2>
+          <h3> {{ tournoi.sport }} </h3>
+          <p> {{ tournoi.description }} </p>
+    
+          <button (click)="redirectionTournoiFini(evenement.nomEvenement, tournoi.nomTournoi)"> Voir les résultats </button>
+          <!-- <button  (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button> -->
+        </div>
+      </ng-container>
+    </div>
+    </ng-container>
+    </div>
+    

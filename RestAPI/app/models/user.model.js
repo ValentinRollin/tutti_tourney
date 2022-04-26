@@ -11,12 +11,7 @@ const User = mongoose.model(
                 ref: "Role"
             }
         ],
-        evenements: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "evenementSchema"
-            }
-        ]
+        
     })
 );
 module.exports = User;

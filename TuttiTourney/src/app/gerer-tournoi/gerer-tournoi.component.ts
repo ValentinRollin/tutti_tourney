@@ -34,7 +34,6 @@ export class GererTournoiComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-
   constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService, private matchService: MatchService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
