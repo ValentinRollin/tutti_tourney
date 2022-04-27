@@ -1,5 +1,6 @@
 
 <div class="container">
+  <button *ngIf="tourOBS>1" (click)="tourmoin()"> voir tour précédent </button>
     <ng-container *ngFor="let poule of poules">
       <div class="poule">
         <p> Poule numéro : {{poule.numeroPoule}}</p>
@@ -10,8 +11,9 @@
           <p *ngIf= "match.vainqueur != undefined"> Le vainqueur est : {{match.vainqueur}} </p>
         </ng-container>
       </div>
-  
+      
     </ng-container>
-  
+      <button *ngIf="lastTour>tourOBS" (click)="tourplus()"> voir tour suivant </button>
+      
   </div>
 

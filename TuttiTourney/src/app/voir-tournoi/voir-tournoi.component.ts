@@ -20,12 +20,12 @@ export class VoirTournoiComponent implements OnInit {
   evenements : Evenement[] = JSON.parse(localStorage.getItem('evenements')!);
   evenement !: Evenement;
   tournoi !: Tournoi;
-  lastTour : number = 0;
+  tourOBS : number = 1;
   poules : Poule[] = [];
   equipes : any[] = [];
-  matchs :any = [];
+  matchs :any;
   vainqueur : any;
-
+  lastTour: number = 0;
   indexTournoi: number | undefined;
 
   constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService, private matchService: MatchService) { }
@@ -35,20 +35,23 @@ export class VoirTournoiComponent implements OnInit {
     (
       (data) => {
         localStorage.setItem('evenements', JSON.stringify(data)), this.evenements = JSON.parse(localStorage.getItem('evenements')!),
+        this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement) || {};
+        this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
+        this.lastTour = this.tournoi.tours.length;
         this.initAll() }
-    );
+        );
   }
   initAll(): void{
-    this.evenement = this.evenements.find(element => element.nomEvenement == this.nomEvenement) || {};
-    this.tournoi = this.evenement.tournois?.find(e  => e.nomTournoi == this.nomTournoi) || {tours:[] };
-    this.lastTour = this.tournoi.tours.length;
-    this.poules = this.tournoi.tours[ this.lastTour-1 ].poules || [];
+    
+    this.poules = this.tournoi.tours[ this.tourOBS-1 ].poules || [];
     this.equipes = this.tournoi.equipes || [];
+    this.matchs=[];
     for (let poule of this.poules){
       this.matchs.push(poule.matchs);
     }
     console.log(this.matchs);
 
   }
-
+  tourplus(): void{this.tourOBS+=1;this.initAll();}
+  tourmoin(): void{this.tourOBS-=1;this.initAll();}
 }
