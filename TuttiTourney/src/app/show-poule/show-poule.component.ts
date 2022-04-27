@@ -137,10 +137,16 @@ export class ShowPouleComponent implements OnInit {
     this.pouleService.updatePoule(this.poules, this.nomEvenement, this.nomTournoi, this.lastTour).subscribe
     (
       (data) => console.log(data),
-      (error: any) => console.log(error),
+      (error: any) => {console.log(error), this.redirectionGererTournoi(this.nomEvenement, this.nomTournoi)},
       ()=> console.log("Succesfully updated poules to database")
     );
 
+  }
+
+
+  redirectionGererTournoi(nomEvenement : any, nomTournoi : any): void
+  {
+    this.route.navigate(["/mes-tournois/gerer", nomEvenement, nomTournoi]);
   }
 
 }

@@ -25,7 +25,7 @@
     <ng-container *ngIf="boolClassement">
 
       <p> Classement : </p>
-      <p *ngFor="let equipe of poule.classement"> {{ equipe['nomEquipe'] }} : {{ equipe['points'] }} points </p>
+      <p *ngFor="let equipe of poule.classement"> {{ equipe['nomEquipe'] }} : {{equipe['points']}} victoires et {{ scoreTotal(equipe, poule.numeroPoule) }} points obtenu au total </p>
 
     </ng-container>
 
@@ -34,5 +34,7 @@
 </ng-container>
 
 </div>
-<button (click)="showClassement()"> Afficher les classements </button>
-<button (click)="redirectionNextTour(nomEvenement, nomTournoi)"> Passer au tour suivant </button>
+<button *ngIf="!boolClassement" (click)="showClassement()"> Afficher les classements </button>
+<button *ngIf="boolClassement" (click)="showClassement()"> Afficher les scores </button>
+<button *ngIf="poules.length >1" (click)="redirectionNextTour(nomEvenement, nomTournoi)"> Passer au tour suivant </button>
+<button *ngIf="poules.length == 1" (click)="termineTournoi()"> Terminer le tournoi </button>

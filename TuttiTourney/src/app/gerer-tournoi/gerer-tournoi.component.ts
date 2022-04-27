@@ -8,6 +8,7 @@ import { Tournoi } from '../interfaces/tournoi';
 import { EvenementService } from '../services/evenement.service';
 import { MatchService } from '../services/match.service';
 import { TokenStorageService } from '../services/token-storage.service';
+import { TournoiService } from '../services/tournois.service';
 
 @Component({
   selector: 'app-gerer-tournoi',
@@ -37,7 +38,8 @@ export class GererTournoiComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
-  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService, private matchService: MatchService, private tokenStorageService: TokenStorageService) { }
+  constructor(private route : Router, public activeRoute : ActivatedRoute, private evenementService: EvenementService,
+    private tournoiService: TournoiService, private matchService: MatchService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -135,15 +137,45 @@ export class GererTournoiComponent implements OnInit {
             nomEquipe: equipe.nomEquipe,
             points: this.calculPoint(equipe.nomEquipe, poule.numeroPoule)
           }
-
           this.classement.push(objet);
         }
-        this.classement.sort((a: { points: number; },b: { points: number; }) => b.points - a.points);
+        this.classement.sort((a: { points: number, nomEquipe:any; },b: { points: number, nomEquipe:any;}): 0 | 1 | -1 =>
+        {
+          if (a.points < b.points){
+            return 1;
+          }
+          if (a.points > b.points){
+            return -1;
+          }
+          if (this.scoreTotal(a, poule.numeroPoule) > this.scoreTotal(b,  poule.numeroPoule)){
+            return -1;
+          }
+          if (this.scoreTotal(a, poule.numeroPoule) < this.scoreTotal(b,  poule.numeroPoule)){
+            return 1;
+          }
+          return 0;
+        });
         console.log(this.classement);
         poule.classement = this.classement;
       }
-
   }
+
+  scoreTotal(a: any, numeroPoule:any ):number{
+    let scoreTotal = 0;
+
+    for (let match of this.matchs[numeroPoule]){
+
+      if (match.nomEquipe1 == a.nomEquipe){
+        scoreTotal += match.scoreEquipe1;
+      }
+      if (match.nomEquipe2 == a.nomEquipe){
+
+        scoreTotal += match.scoreEquipe2;
+      }
+    }
+    return scoreTotal;
+  }
+
   showClassement(): void{
     this.boolClassement = !this.boolClassement;
 
@@ -165,6 +197,20 @@ export class GererTournoiComponent implements OnInit {
 
   redirectionNextTour(nomEvenement : any, nomTournoi : any) : void {
     this.route.navigate([ "mes-tournois/gerer/nextTour/", nomEvenement, nomTournoi, ]);
+  }
+
+  termineTournoi(){
+    this.tournoi.etat = 2;
+    this.tournoiService.updateTournoi(this.tournoi, this.nomTournoi, this.nomEvenement).subscribe
+    (
+      (data) => console.log(data),
+      (error: any) => {console.log(error), this.redirectionHome()},
+      ()=> console.log("Succesfully updated poules to database")
+    );
+  }
+
+  redirectionHome() : void {
+    this.route.navigate([ "/home" ]);
   }
 
 }
