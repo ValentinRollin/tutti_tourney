@@ -9,7 +9,8 @@
           <p> Nom du tournoi:<b> {{ tournoi.nomTournoi }} </b></p>
           <p> Sport:<b> {{ tournoi.sport }}</b> </p>
           <p> {{ tournoi.description }} </p>
-    
+          <p> Gagnant : {{ addVainqueur(tournoi) }}  {{ tournoi.tours[ tournoi.tours.length -1 ].poules[0].matchs[0].vainqueur }}</p>
+
           <button (click)="redirectionTournoiFini(evenement.nomEvenement, tournoi.nomTournoi)"> Voir les résultats </button>
           <!-- <button  (click)="redirectionOrganisation(nomEvenement, tournoi.nomTournoi)"> Organisation du tournoi </button> -->
         </div>
@@ -17,4 +18,3 @@
     </div>
     </ng-container>
     </div>
-    
