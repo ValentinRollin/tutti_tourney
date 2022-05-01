@@ -1,5 +1,9 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+</style>
 <div class="container">
   <div class="connexion-user">
+    <h2> Connexion </h2>
     <form (ngSubmit)="onSubmit()">
       <p> Pseudonyme : <input type="text" name="pseudo" [(ngModel)]="form.username"></p>
       <p> Mot de Passe : <input type="password" name="mdp" [(ngModel)]="form.password"></p>

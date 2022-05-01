@@ -4,13 +4,8 @@
     "\\RestAPI",
     "\\TuttiTourney",
     "\\TuttiTourney\\src",
-    "\\TuttiTourney\\src\\app",
-    "\\TuttiTourney\\src\\app\\connexion-user",
-    "\\TuttiTourney\\src\\app\\create-user",
-    "\\TuttiTourney\\src\\app\\interfaces",
-    "\\TuttiTourney\\src\\app\\navbar",
-    "\\TuttiTourney\\src\\app\\services"
+    "\\TuttiTourney\\src\\app"
   ],
-  "SelectedNode": "\\TuttiTourney\\src\\app\\create-user\\create-user.component.html",
+  "SelectedNode": "\\TuttiTourney\\src\\app\\next-tour",
   "PreviewInSolutionExplorer": false
 }

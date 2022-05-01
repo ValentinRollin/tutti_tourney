@@ -2,14 +2,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .create-user {
   margin-top: 10em;
-  width: 460px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   background-color: #222831;
-  padding-left: 1em;
   border-radius: 25px;
   overflow: hidden;
+  text-align: center;
+}
+
+.create-user form {
+  margin-top: 20%;
+}
+
+input[type=submit] {
+  margin-top: 5%;
+}
+
+h2 {
+  margin-top: 15%;
 }
