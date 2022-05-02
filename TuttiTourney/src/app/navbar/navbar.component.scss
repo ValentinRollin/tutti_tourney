@@ -18,6 +18,13 @@ a {
   margin-right: 1.2em;
 }
 
+p{
+  position: relative;
+  margin-left: 12px;
+  margin-right: 1.2em;
+  font-family: 'Noto Sans', sans-serif;
+}
+
 a:before {
   content: "";
   position: absolute;
