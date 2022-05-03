@@ -1,22 +1,20 @@
 .container {
-    margin: 0 auto;
-    margin-top: 3em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 50px;
-    border:solid #e09f7d;
-    border-radius: 10px;
-  }
-  
-  .poule {
-    width: 600px;
-    height: auto;
-    background-color: #e09f7d;
-    padding-left: 1em;
-    border-radius: 25px;
-    margin: 20px;
-    // margin-top: 3em;
-    overflow: hidden;
-  }
-  
+  margin: 0 auto;
+  margin-top: 3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.poule {
+  width: 600px;
+  height: auto;
+  background-color: #222831;
+  padding-left: 1em;
+  border-radius: 25px;
+  margin: 20px;
+  // margin-top: 3em;
+  overflow: hidden;
+}
