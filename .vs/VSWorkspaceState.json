@@ -4,8 +4,9 @@
     "\\RestAPI",
     "\\TuttiTourney",
     "\\TuttiTourney\\src",
-    "\\TuttiTourney\\src\\app"
+    "\\TuttiTourney\\src\\app",
+    "\\TuttiTourney\\src\\app\\navbar"
   ],
-  "SelectedNode": "\\TuttiTourney\\src\\app\\voir-tournoi",
+  "SelectedNode": "\\TuttiTourney\\src\\app\\navbar\\navbar.component.scss",
   "PreviewInSolutionExplorer": false
 }
