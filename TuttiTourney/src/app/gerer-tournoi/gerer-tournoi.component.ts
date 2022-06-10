@@ -213,4 +213,10 @@ export class GererTournoiComponent implements OnInit {
     this.route.navigate([ "/home" ]);
   }
 
+  numeroToLetter(n:any): String{
+    let letters:string[] = ['A','B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    return letters[n];
+  }
+
 }

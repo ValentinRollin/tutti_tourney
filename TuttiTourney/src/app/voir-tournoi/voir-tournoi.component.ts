@@ -42,7 +42,7 @@ export class VoirTournoiComponent implements OnInit {
         );
   }
   initAll(): void{
-    
+
     this.poules = this.tournoi.tours[ this.tourOBS-1 ].poules || [];
     this.equipes = this.tournoi.equipes || [];
     this.matchs=[];
@@ -54,4 +54,10 @@ export class VoirTournoiComponent implements OnInit {
   }
   tourplus(): void{this.tourOBS+=1;this.initAll();}
   tourmoin(): void{this.tourOBS-=1;this.initAll();}
+
+  numeroToLetter(n:any): String{
+    let letters:string[] = ['A','B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    return letters[n];
+  }
 }

@@ -21,7 +21,7 @@
     <ng-container *ngFor="let poule of poules">
 
       <div class="poule" *ngIf="poule.equipes?.length != 0">
-        <h2> Poule numéro : {{poule.numeroPoule}}</h2>
+        <h2> Poule numéro : {{numeroToLetter(poule.numeroPoule)}}</h2>
         <h3> Equipes : </h3>
         <ng-container *ngFor="let equipe of poule.equipes">
           <p> {{equipe.nomEquipe}} | niveau : {{equipe.niveau}}</p>

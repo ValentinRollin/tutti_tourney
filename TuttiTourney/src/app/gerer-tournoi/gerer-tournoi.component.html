@@ -2,7 +2,7 @@
 <div class="container">
   <ng-container *ngFor="let poule of poules">
     <div class="poule">
-      <p> Poule numéro : {{poule.numeroPoule}}</p>
+      <p> Poule numéro : {{numeroToLetter(poule.numeroPoule)}}</p>
 
       <ng-container *ngIf="!boolClassement">
         <p> Matchs : </p>
@@ -25,7 +25,7 @@
     <ng-container *ngIf="boolClassement">
 
       <p> Classement : </p>
-      <p *ngFor="let equipe of poule.classement"> {{ equipe['nomEquipe'] }} : {{equipe['points']}} victoires et {{ scoreTotal(equipe, poule.numeroPoule) }} points obtenu au total </p>
+      <p *ngFor="let equipe of poule.classement; let index = index;"> {{ index + 1 }} - {{ equipe['nomEquipe'] }} : {{equipe['points']}} victoires et {{ scoreTotal(equipe, poule.numeroPoule) }} points obtenu au total </p>
 
     </ng-container>
 

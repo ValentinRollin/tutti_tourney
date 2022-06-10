@@ -20,5 +20,3 @@ const evenementSchema = new mongoose.Schema({
 });
 
 exports.evenementSchema = evenementSchema;
-
-const Evenement = mongoose.model("Event", evenementSchema);
